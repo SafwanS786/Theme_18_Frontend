@@ -12,9 +12,11 @@ body {
 
 .container {
   width: 100%;
+  margin-inline: auto;
   padding: 0 4rem;
+  overflow-x: hidden;
+
   /* background-color: crimson; */
-  box-sizing: border-box;
 }
 
 .main_header {
@@ -24,7 +26,8 @@ body {
   position: fixed;
   top: 0; /* stick to top */
   left: 0;
-  z-index: 100;
+  right: 0;
+  z-index: 1000;
 }
 
 .Header_logo_class img {

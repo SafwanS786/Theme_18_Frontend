@@ -1,11 +1,12 @@
 .latest-news {
   width: 100%;
   background-color: #fff;
-  margin-bottom: 5%;
-  text-align: center;
   margin: 5% 0;
+  text-align: center;
   padding: 15px 110px;
 }
+
+/* Heading tag */
 #news {
   display: flex;
   align-items: center;
@@ -22,134 +23,152 @@
   border: 1px solid #000;
   padding: 5px 10px;
 }
+
+/* Subheading */
 #news_para {
   font-family: "Gantari";
   font-weight: 600;
   font-size: 35px;
   line-height: 100%;
   color: #000;
+  margin: 20px 0;
 }
+
+/* Parent flex box */
 .news_img {
   display: flex;
   gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: 30px;
 }
 
+/* Image size (desktop) */
 .Transformative_Approaches img,
 .Modern img,
 .top img {
   width: 380px;
   height: 250px;
+  border-radius: 10px;
+  object-fit: cover;
 }
-.content_news {
-  font-family: "Gantari";
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 100%;
-  color: #000;
-  /* text-align: start; */
-}
-#h {
-  color: #dddddd;
-  /* color: aqua; */
-  border: 1px solid #dddddd;
-}
-#state {
-  /* background-color: aqua; */
-  font-family: "Poppins";
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 100%;
-  width: 320px;
-  height: auto;
-  /* margin: 0; */
-  margin: 0 0 10% 0;
-  text-align: start;
-}
+
+/* Card container */
 .Transformative_Approaches,
 .Modern,
 .top {
   border-radius: 10px;
   background-color: #ffffff;
   padding: 20px;
-  height: auto;
-  /* background-color: aqua; */
-  /* justify-content: space-between; */
   text-align: justify;
+  transition: all 0.3s ease;
 }
-/* direct child .news_img na child che 3 */
-/* .news_img > div {
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
-  cursor: pointer;
-} */
+
+/* Card inner content */
+.content_news {
+  font-family: "Gantari";
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 150%;
+  color: #000;
+  margin-top: 15px;
+}
+
+/* Separator line */
+#h {
+  border: 1px solid #dddddd;
+  margin: 10px 0;
+}
+
+/* Paragraph inside card */
+#state {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  width: 320px;
+  margin: 10px 0 20px 0;
+  text-align: start;
+}
+
+/* Card hover effect */
 .news_img > div {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  /* transition: all 0.3s ease; */
   cursor: pointer;
-  /* background-color: aqua; */
-  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); */
-}
-.news_img > div:first-child div:nth-child(2),
-.content_news:hover {
-  /* background-color: red; */
-  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); */
-  /* transform: scale(1.1);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); */
-}
-.news_img img {
-  width: 100%;
-  /* display: block; */
-  transition: transform 0.5s ease;
-}
-/* .content_news {
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: white;
-  padding: 20px;
-  transform: translate(100%);  hidden below 
-  transition: transform 0.4s ease-in-out;
-} */
-/* .news_img > div:hover .content_news {
-  transform: translateY(0%);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
-} */
-.news_img > div:hover {
-  /* background-color: aqua; */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  /* width: 100%; */
-}
-.news_img > div:hover img {
-  transform: scale(1.1);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
-@media (max-width: 480px) {
+.news_img > div:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+.news_img img {
+  width: 100%;
+  transition: transform 0.5s ease;
+}
+
+.news_img > div:hover img {
+  transform: scale(1.05);
+}
+
+/* "Read more" link */
+.explore {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  color: #d16751;
+  transition: color 0.3s ease;
+}
+
+.explore:hover {
+  color: #000;
+}
+
+.arrow {
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.explore:hover .arrow {
+  /* transform: translateX(5px); */
+}
+
+/* 📱 Responsive styles */
+@media (max-width: 768px) {
   #news_para {
-    font-size: 1.2rem;
+    font-size: 28px;
   }
+
   .Transformative_Approaches img,
   .Modern img,
   .top img {
     width: 100%;
-    height: auto; /* ✅ keep proportions */
-    border-radius: 10px;
+    height: auto;
   }
+
   .Transformative_Approaches,
   .Modern,
   .top {
-    flex: 1 1 300px; /* ✅ responsive box min size */
-    max-width: 380px;
-    border-radius: 100px;
-    background-color: yellow;
-    padding: 20px;
-    text-align: justify;
-    transition: all 0.3s ease;
+    flex: 1 1 100%;
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  #state {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  #news_para {
+    font-size: 22px;
+  }
+
+  .latest-news {
+    padding: 15px 20px;
   }
 }

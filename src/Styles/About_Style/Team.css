@@ -1,4 +1,4 @@
-.Team_Main {
+/* .Team_Main {
   background-color: #000;
   text-align: center;
   color: #fff;
@@ -9,7 +9,36 @@
   display: inline-block;
   border-radius: 30px;
   border: 1px solid #fff;
-  padding: 0.2rem 0.7rem;
+  padding: 0.2rem 0.7rem; 
+} */
+.Team_Main {
+  background-color: #000;
+  text-align: center;
+  color: #fff;
+  margin-top: 4rem;
+  padding: 4rem 2rem;
+}
+
+/* Small heading */
+#tem {
+  display: inline-block;
+  border-radius: 30px;
+  border: 1px solid #fff;
+  padding: 0.3rem 1rem;
+  font-family: "Gantari";
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+
+  margin-bottom: 1rem;
+}
+#per {
+  font-family: "Gantari";
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0 auto;
+  max-width: 600px;
+  line-height: 1.2;
 }
 .pht_sld {
   display: flex;
@@ -81,4 +110,36 @@
   font-size: 1.2rem;
   font-weight: 600;
   color: #ffffff;
+}
+
+/* New che  */
+
+/* 📱 Responsive styles */
+@media (max-width: 768px) {
+  #per {
+    font-size: 1.8rem;
+  }
+  .overlay_b {
+    width: 200px;
+  }
+  .overlay_b img {
+    height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  #per {
+    font-size: 1.5rem;
+  }
+  .pht_sld {
+    gap: 0;
+  }
+  .overlay_b {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 0;
+  }
+  .overlay_b img {
+    height: auto;
+  }
 }

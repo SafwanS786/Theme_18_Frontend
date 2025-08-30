@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from "react";
 import "../../Styles/About_Style/Team.css";
-import team1 from "../About_component/img/teamph1.webp";
-import team2 from "../About_component/img/teamph2.webp";
-import team3 from "../About_component/img/teamph3.webp";
-import team4 from "../About_component/img/teamph4.webp";
+import team1 from "../About_component/img/teamph1.png";
+import team2 from "../About_component/img/teamph2.png";
+import team3 from "../About_component/img/teamph3.png";
+import team4 from "../About_component/img/teamph4.png";
 
 export default function Team() {
   const TeamPht = [
     {
-      icon: team3,
+      icon: team1,
       alt: "Team_Photo",
       Name: "Marvin McKinney",
       Work: "Architecture",
     },
     {
-      icon: team1,
+      icon: team2,
       alt: "Team_Photo",
       Name: "Dianne Russell",
       Work: "Civil Engineer",
     },
     {
-      icon: team2,
+      icon: team3,
       alt: "Team_Photo",
       Name: "Esther Howard",
       Work: "Engineer",

@@ -1,120 +1,113 @@
+/* 🔹 Base Section */
 .home-section {
   width: 100%;
-  height: 300px;
-  /* min-height: 100vh; */
-  /* background-size: contain; */
+  min-height: 70vh; /* flexible height */
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(1rem, 5vw, 4rem); /* responsive side padding */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  /* height: 100vh; */
-  /* height: 700px; */
-  /* height: 900px; */
-  display: flex;
-  overflow: hidden;
-  align-items: center;
-  /* justify-content: flex-start; */
   position: relative;
-  /* padding: 0 4rem; */
-  padding: 0 clamp(1rem, 5vw, 4rem);
+  overflow: hidden;
   box-sizing: border-box;
-}
-
-.home_content {
-  max-width: 500px;
   color: white;
   font-family: "Gantari", sans-serif;
-  /* margin-left: 4%; */
+}
+
+/* 🔹 Text Content */
+.home_content {
+  max-width: 600px; /* readable line length */
+  z-index: 2; /* keep above background */
+  font-family: "Gantari";
 }
 
 .home_content h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 600;
-  margin-bottom: 15px;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
 .home_content p {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  margin: 20px 0;
-  margin-bottom: 25px;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  opacity: 0.95; /* softer readability */
 }
 
 .home_content button {
   background-color: #d16751;
   border: none;
-  padding: 14px 30px;
-  border-radius: 4px;
+  padding: clamp(0.6rem, 1.2vw, 0.9rem) clamp(1.2rem, 2.5vw, 1.8rem);
+  border-radius: 6px;
   color: white;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  font-family: "Gantari";
 }
 
 .home_content button:hover {
   background-color: #b45643;
+  transform: translateY(-2px);
 }
 
-/*  */
+/* 🔹 Responsive Breakpoints */
 
-@media (max-width: 768px) {
-  .home_content {
-    margin-left: 0;
-    /* background-color: crimson; */
-  }
+/* Mobile ≤480px */
+@media (max-width: 480px) {
   .home-section {
     padding: 0 1rem;
+    min-height: 60vh; /* smaller but still tall */
+    background-position: top; /* show top part on small screens */
+    text-align: center; /* center align content */
+    justify-content: center;
   }
-}
-
-@media (max-width: 480px) {
   .home_content {
-    max-width: 100%; /* use full width */
-    text-align: center; /* center align on mobile */
-    /* background-color: aqua; */
+    max-width: 100%;
   }
   .home_content h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    font-weight: 700;
   }
   .home_content p {
     font-size: 0.95rem;
   }
   .home_content button {
     padding: 10px 20px;
-    font-size: 0.9rem;
-  }
-  .home-section {
-    background-size: cover;
-    background-position: top; /* show important part on mobile */
-    /* background-color: aqua; */
-    width: 100%;
-    /* height: auto; */
+    font-size: 0.85rem;
   }
 }
 
-/* sm: ≥640px */
-@media (min-width: 640px) {
+/* Tablet ≤768px */
+@media (max-width: 768px) {
   .home-section {
-    height: 400px;
+    min-height: 65vh;
+    padding: 0 1.5rem;
+  }
+  .home_content {
+    max-width: 90%;
   }
 }
 
-/* md: ≥768px */
-@media (min-width: 768px) {
-  .home-section {
-    height: 400px;
-  }
-}
-
-/* lg: ≥1024px */
+/* Desktop ≥1024px */
 @media (min-width: 1024px) {
   .home-section {
-    height: 600px;
+    min-height: 80vh;
+  }
+  .home_content {
+    max-width: 650px;
   }
 }
 
-/* 2xl: ≥1536px */
+/* Very Large Screens ≥1536px */
 @media (min-width: 1536px) {
   .home-section {
-    height: 800px;
+    min-height: 90vh;
+  }
+  .home_content h1 {
+    font-size: 3.5rem;
   }
 }

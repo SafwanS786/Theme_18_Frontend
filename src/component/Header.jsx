@@ -7,6 +7,9 @@ import { NavLink } from "react-router-dom";
 
 export default function Header() {
   const [MenuOpen, setMenuOpen] = useState(false);
+  const handleclick = () => {
+    setMenuOpen(false);
+  };
   return (
     <header
       className="container main_header"
@@ -59,6 +62,7 @@ export default function Header() {
                 <NavLink
                   to="/home"
                   className={({ isActive }) => (isActive ? "active" : "")}
+                  onClick={handleclick}
                 >
                   HOME
                 </NavLink>
@@ -67,6 +71,7 @@ export default function Header() {
                 <NavLink
                   to="/about"
                   className={({ isActive }) => (isActive ? "active" : "")}
+                  onClick={handleclick}
                 >
                   ABOUT US
                 </NavLink>
@@ -75,22 +80,25 @@ export default function Header() {
                 <NavLink
                   to="/projects"
                   className={({ isActive }) => (isActive ? "active" : "")}
+                  onClick={handleclick}
                 >
                   PROJECTS
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink
                   to="/details"
                   className={({ isActive }) => (isActive ? "active" : "")}
+                  onClick={handleclick}
                 >
                   DETAILS
                 </NavLink>
-              </li>
+              </li> */}
               <li>
                 <NavLink
                   to="/blog"
                   className={({ isActive }) => (isActive ? "active" : "")}
+                  onClick={handleclick}
                 >
                   BLOG
                 </NavLink>
@@ -99,6 +107,7 @@ export default function Header() {
                 <NavLink
                   to="/contact_us"
                   className={({ isActive }) => (isActive ? "active" : "")}
+                  onClick={handleclick}
                 >
                   CONTACT US
                 </NavLink>

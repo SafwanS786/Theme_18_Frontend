@@ -19,7 +19,7 @@ export default function Partners() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    adaptiveHeight: true,
+    adaptiveHeight: false,
   });
 
   // ✅ Force slider re-render after mount to fix F5 breakpoint issue
@@ -63,7 +63,7 @@ export default function Partners() {
     },
   ];
   return (
-    <div className="container P_Main">
+    <div className="container1 P_Main">
       <p>OUR PARTNERS</p>
       <h1>Trusted Collaborations That Strengthen Every Build</h1>
       {showSlider && (
