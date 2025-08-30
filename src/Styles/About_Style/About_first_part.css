@@ -1,9 +1,8 @@
-.main_content {
+/* .main_content {
   font-family: "Gantari";
 }
 .Main_About_us {
   width: 100%;
-  /* height: 100vh; */
   min-height: 500px;
   height: auto;
   background-size: cover;
@@ -16,7 +15,6 @@
   justify-content: flex-end;
   align-items: flex-start;
   color: #ffffff;
-  /* background-size: contain; */
 }
 .ovr {
   position: relative;
@@ -51,5 +49,49 @@
   }
   .breadcrumb {
     font-size: 1rem;
+  }
+} */
+.main_content {
+  font-family: "Gantari", sans-serif;
+}
+
+.Main_About_us {
+  width: 100%;
+  min-height: 500px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  color: #ffffff;
+}
+
+.ovr {
+  position: relative;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  max-width: 1200px; /* keeps content centered and not too wide */
+  width: 100%;
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.breadcrumb {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  color: #ddd;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Optional: improve readability on very small screens */
+@media (max-width: 480px) {
+  .breadcrumb {
+    color: #eaeaea; /* slightly brighter for small screens */
   }
 }
