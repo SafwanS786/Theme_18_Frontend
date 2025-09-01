@@ -4,6 +4,7 @@ import Blog_img from "../Blog_component/img/Blog_Image.png";
 import blog1_img from "../Blog_component/img/Transformative.png";
 import blog2_img from "../Blog_component/img/image.png";
 import blog3_img from "../Blog_component/img/Top.png";
+import { Link } from "react-router-dom";
 export default function Blog_Main() {
   return (
     <>
@@ -22,9 +23,9 @@ export default function Blog_Main() {
                 Our team brings decades of experience across commercial and
                 residential projects.
               </p>
-              <a className="explore" href="#">
+              <Link className="explore" to="/blog/details">
                 Read More <span className="arrow">→</span>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="Modern">
@@ -36,9 +37,9 @@ export default function Blog_Main() {
                 Our team brings decades of experience across commercial and
                 residential projects.
               </p>
-              <a className="explore" href="#">
+              <Link className="explore" to="/blog/details">
                 Read More <span className="arrow">→</span>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="top">
@@ -50,9 +51,9 @@ export default function Blog_Main() {
                 Our team brings decades of experience across commercial and
                 residential projects.
               </p>
-              <a className="explore" href="#">
+              <Link className="explore" to="/blog/details">
                 Read More <span className="arrow">→</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -67,9 +68,9 @@ export default function Blog_Main() {
                   Our team brings decades of experience across commercial and
                   residential projects.
                 </p>
-                <a className="explore" href="#">
+                <Link className="explore" to="/blog/details">
                   Read More <span className="arrow">→</span>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="Modern">
@@ -81,9 +82,9 @@ export default function Blog_Main() {
                   Our team brings decades of experience across commercial and
                   residential projects.
                 </p>
-                <a className="explore" href="#">
+                <Link className="explore" to="/blog/details">
                   Read More <span className="arrow">→</span>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="top">
@@ -95,9 +96,9 @@ export default function Blog_Main() {
                   Our team brings decades of experience across commercial and
                   residential projects.
                 </p>
-                <a className="explore" href="#">
+                <Link className="explore" to="/blog/details">
                   Read More <span className="arrow">→</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

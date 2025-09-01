@@ -71,7 +71,8 @@ export default function Projects_Home() {
                 <img src={item.icon} alt={item.alt} />
 
                 <div className="over">
-                  <Link to={`/projects/${item.id}`}>
+                  {/* <Link to={`/projects/${item.id}`}> */}
+                  <Link to="/projects/details">
                     <h1>{item.alt}</h1>
                   </Link>
                   <p>{item.Text}</p>

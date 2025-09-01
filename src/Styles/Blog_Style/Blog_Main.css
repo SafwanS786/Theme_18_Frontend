@@ -1,4 +1,74 @@
+/*  */
 .blog_img {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(1rem, 4vw, 4rem); /* responsive padding */
+  height: 600px;
+  height: 60vh;
+  /* flexible height */
+  position: relative;
+  width: 100%;
+  background-size: cover; /* fills entire box */
+  background-position: center 90%;
+
+  overflow: hidden; /* prevents content overflow */
+}
+
+#blog_hd {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: clamp(1.5rem, 3vw, 2.2rem); /* responsive font */
+  margin-bottom: 0.5rem;
+}
+
+#blog_p {
+  font-weight: 400;
+  font-size: clamp(0.9rem, 2vw, 1rem); /* responsive font */
+  color: #ffffff;
+  max-width: 600px; /* keeps text readable */
+  line-height: 1.6;
+}
+
+.blog {
+  width: 100%;
+  height: auto;
+}
+
+.blog2 {
+  margin-bottom: 4rem;
+}
+
+/* ✅ Extra responsive tweaks */
+@media (max-width: 768px) {
+  .blog_img {
+    height: 50vh;
+    padding: 2rem;
+  }
+
+  #blog_p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog_img {
+    height: 40vh;
+    align-items: flex-start;
+  }
+
+  #blog_hd {
+    font-size: 1.4rem;
+  }
+
+  #blog_p {
+    font-size: 0.85rem;
+  }
+}
+
+/* 
+
+old .blog_img {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -7,7 +77,6 @@
   position: relative;
   width: 100%;
   background-size: contain;
-  background-position: center 90%;
 }
 #blog_hd {
   font-weight: 600;
@@ -25,8 +94,8 @@
 .blog2 {
   margin-bottom: 4rem;
 }
-
-/* 
+  suthi che ahiya
+  --------------------------------------------------------
 .Blog_Main_Class {
   margin-top: 4rem;
   display: grid;

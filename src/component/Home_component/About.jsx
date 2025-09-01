@@ -66,7 +66,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="about-lab  el">ABOUT US</span>
+            <span className="about-label">ABOUT US</span>
             <h2>We Craft Digital Experiences That Drive Results</h2>
             <p>
               We're a creative team focused on designing and building digital
