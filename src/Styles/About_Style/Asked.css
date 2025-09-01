@@ -251,11 +251,10 @@
 
 .freq_down_part {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: 2rem;
-  justify-content: center;
-  align-items: flex-start;
-  max-width: 1200px;
+  justify-content: space-around;
   margin: 0 auto;
 }
 

@@ -18,9 +18,19 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* Aligns content at the bottom */
-  padding: 2rem;
+  padding: 4rem;
 }
-
+.Contact_img h1 {
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+.Contact_img p {
+  color: #fff;
+  font-size: 1rem;
+  font-family: "Poppins";
+  font-weight: 400;
+}
 .contact_content {
   text-align: center;
   color: white;
@@ -40,23 +50,75 @@
   display: flex;
   flex-direction: row;
   gap: 2rem;
+  margin-bottom: 4rem;
 }
-.info_our {
+.info_our h2 {
+  margin-top: 4rem;
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+.info_our p {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1rem;
+}
+.info_contact {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+.info_contact li {
+  /* background-color: aqua; */
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+.info_contact span {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.info_contact p {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.info_contact div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+#ico {
+  background-color: #000000;
+  color: #fff;
+  border-radius: 30px;
+  padding: 0.3rem;
+  /* width: 3%;
+  height: auto; */
+  width: 30px; /* better fixed width */
+  height: 30px;
+  flex-shrink: 0;
+  text-align: center;
 }
 .contact_form {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.9
-  ); /* White background with transparency */
+  background-color: rgba(255, 255, 255, 0.9);
+  /* White background with transparency */
   padding: 3rem;
   border-radius: 8px;
   width: 40%;
   margin: 0 auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 50px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); */
+  /* box-shadow: 5px -5px 10px rgba(0, 0, 0, 0.15); top-right */
+  /* -5px 5px 10px rgba(0, 0, 0, 0.15), bottom-left s; */
+  /* 5px 5px 10px rgba(0, 0, 0, 0.15); bottom-right */
 }
-
+.half {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: space-between;
+  /* width: 100%; */
+}
 .contact_form h2 {
   font-size: 2rem;
   font-weight: bold;
@@ -70,6 +132,7 @@
 }
 
 .form_group {
+  flex: 1;
   margin-bottom: 1.5rem;
 }
 
@@ -94,31 +157,107 @@
 }
 
 .btn_submit {
-  background-color: #f76c5e; /* Button color */
+  background-color: #d16751; /* Button color */
   color: white;
   padding: 1rem 2rem;
   border: none;
   border-radius: 5px;
   font-size: 1.2rem;
   cursor: pointer;
-  width: 100%;
+  /* width: 100%; */
+  justify-content: flex-end;
   transition: background-color 0.3s;
+  font-family: "Gantari";
 }
 
 .btn_submit:hover {
   background-color: #e34f3a; /* Darker shade on hover */
 }
+.map_container {
+  width: 100%;
+  height: 400px;
+  margin-top: 2rem;
+}
 
-@media (max-width: 768px) {
+.map_container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 10px; /* optional */
+}
+
+@media (max-width: 1024px) {
   .Contact_img {
-    height: 500px; /* Adjust height for smaller screens */
+    height: 500px;
+    padding: 3rem;
   }
 
   .contact_form {
-    width: 80%; /* Adjust form width on mobile */
+    width: 60%; /* wider form */
+    padding: 2.5rem;
+  }
+
+  .Part_div {
+    flex-direction: column; /* stack content */
+    gap: 2rem;
+  }
+}
+
+/* Mobile (<= 768px) */
+@media (max-width: 768px) {
+  .Contact_img {
+    height: 400px;
+    padding: 2rem;
+  }
+
+  .contact_form {
+    width: 90%; /* almost full width */
+    padding: 2rem;
+  }
+
+  .half {
+    flex-direction: column; /* Email & Phone stack */
+    gap: 1rem;
   }
 
   .contact_content h1 {
     font-size: 2rem;
+  }
+
+  .contact_content p {
+    font-size: 1rem;
+  }
+
+  .map_container {
+    height: 300px; /* smaller map */
+  }
+}
+
+/* Small Mobile (<= 480px) */
+@media (max-width: 480px) {
+  .Contact_img {
+    height: 300px;
+    background-size: cover;
+    background-position: center 90%;
+    padding: 1rem;
+  }
+
+  .contact_form {
+    width: 100%; /* full width */
+    padding: 1.5rem;
+    border-radius: 0; /* flush with screen */
+  }
+
+  .contact_content h1 {
+    font-size: 1.6rem;
+  }
+
+  .contact_content p {
+    font-size: 0.9rem;
+  }
+
+  .btn_submit {
+    width: 100%; /* full width button */
+    text-align: center;
   }
 }

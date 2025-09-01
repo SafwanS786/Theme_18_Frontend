@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Header_logo from "../component/Home_component/img/c_logo.jpg";
 import "../Styles/Home_Style/header.css";
-import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 export default function Header() {

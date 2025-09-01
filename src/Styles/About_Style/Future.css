@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  gap: clamp(1rem, 3vw, 3rem);
   margin: 5rem auto;
   max-width: 1200px;
   padding: 0 1rem;
@@ -15,8 +15,8 @@
 }
 
 .abt_img_class img {
-  width: 100%;
-  max-width: 500px;
+  max-width: 100%;
+  /* max-width: 500px; */
   height: auto;
   border-radius: 12px;
   object-fit: cover;
