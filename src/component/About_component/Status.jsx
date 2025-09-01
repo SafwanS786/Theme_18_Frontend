@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../Styles/About_Style/Status.css";
+import { motion } from "framer-motion";
 export default function Status() {
   const [complete, setComplete] = useState(0);
   useEffect(() => {
@@ -62,11 +63,11 @@ export default function Status() {
     return () => clearInterval(counter);
   }, []);
   return (
-    <div className="container Status_Main">
+    <motion.div className="container Status_Main">
       <p id="cmp_lbl">Our company status</p>
       <h1 id="cmp_head">Trusted & Reliable</h1>
       <div className="counter_div">
-        <div className="complete">
+        <div>
           <h1>{complete}+</h1>
           <p>Completed Projects</p>
         </div>
@@ -83,6 +84,6 @@ export default function Status() {
           <p>Running Project</p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
