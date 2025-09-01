@@ -6,6 +6,7 @@ import ch4 from "../About_component/img/ch4.jpg";
 import ch2 from "../About_component/img/ch2.jpg";
 import chs2 from "../About_component/img/chs2.avif";
 import chs3 from "../About_component/img/chs3.jpg";
+import { motion } from "framer-motion";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -72,16 +73,37 @@ export default function Choose() {
       <section className="why-choose-us">
         <div className="Main_Part_Chs">
           <div className="container">
-            <h2 className="section-title">Why Choose Us</h2>
-            <h1 className="section-subtitle">
+            <motion.h2
+              className="section-title"
+              initial={{ opacity: 0, x: -100, y: 50 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              Why Choose Us
+            </motion.h2>
+            <motion.h1
+              className="section-subtitle"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              // viewport={{ once: true }}
+            >
               We stand apart by delivering excellence in every project.
-            </h1>
+            </motion.h1>
 
             <div className="points-grid">
               {points.map((item, index) => (
                 <div className="point-card" key={index}>
                   <CheckCircle className="icon" />
-                  <p>{item}</p>
+                  <motion.p
+                    initial={{ opacity: 0, skewX: -20 }}
+                    whileInView={{ opacity: 1, skewX: 0 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                  >
+                    {item}
+                  </motion.p>
                 </div>
               ))}
             </div>

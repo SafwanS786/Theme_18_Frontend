@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../../Styles/About_Style/Asked.css";
 import frq from "../About_component/img/Freq.png";
+import { motion } from "framer-motion";
 export default function Asked_Que() {
   const [Index, setIndex] = useState(null);
 
@@ -31,8 +32,22 @@ export default function Asked_Que() {
   ];
   return (
     <div className="container Asked_Main">
-      <p id="Ans">Special Answer</p>
-      <h1 className="Asked_head">Frequently Asked Questions</h1>
+      <motion.p
+        id="Ans"
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ type: "spring", stiffness: 100 }}
+      >
+        Special Answer
+      </motion.p>
+      <motion.h1
+        className="Asked_head"
+        initial={{ opacity: 0, filter: "blur(10px)" }}
+        whileInView={{ opacity: 1, filter: "blur(0px)" }}
+        transition={{ duration: 1 }}
+      >
+        Frequently Asked Questions
+      </motion.h1>
       <div className="freq_down_part">
         <div className="freq_list_container">
           {list.map((item, index) => (
@@ -42,7 +57,13 @@ export default function Asked_Que() {
               onClick={() => toggleFAQ(index)}
             >
               <div className="freq_question">
-                <span>{item.Que}</span>
+                <motion.span
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 2 }}
+                  viewport={{ once: true }}
+                >
+                  {item.Que}
+                </motion.span>
                 <span className="icon">{Index === index ? "×" : "+"}</span>
               </div>
               {Index === index && <div className="freq_answer">{item.Ans}</div>}
