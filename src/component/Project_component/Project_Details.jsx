@@ -216,6 +216,9 @@ export default function Project_Details() {
       </div>
       {/*--------------------------------------------------------------------Start Array ahiya thi ok */}
       <div className="container Details_Main">
+        <Link to="/projects">
+          <button id="cntt">Back to Projects</button>
+        </Link>
         {ProjectData.map((item, index) => (
           <React.Fragment key={index}>
             <img src={item.icon} alt={item.alt} />
@@ -256,7 +259,7 @@ export default function Project_Details() {
         ))}
       </div>
       <Link to="/projects">
-        <button>Back to Projects</button>
+        <button id="cntt">Back to Projects</button>
       </Link>
     </>
   );

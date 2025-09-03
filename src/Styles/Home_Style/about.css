@@ -25,6 +25,7 @@
 .about-content p {
   font-size: clamp(0.95rem, 1.8vw, 1.1rem);
   line-height: 1.6;
+  font-family: "Poppins";
   margin-bottom: 1rem;
 }
 .about-label {
@@ -43,6 +44,7 @@
   margin-bottom: 15px;
 }
 .about-btn {
+  font-family: "Gantari";
   background-color: #d16751;
   border: none;
   padding: 10px 20px;

@@ -30,11 +30,11 @@ export default function Header() {
           {MenuOpen ? "×" : "☰"}
         </motion.button>
         <nav className={`nav ${MenuOpen ? "active" : ""}`}>
-          <motion.div
+          <div
             className="nav_bar"
-            initial={{ y: 40, opacity: 0 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            // initial={{ y: 40, opacity: 0 }}
+            // whileInView={{ opacity: 1, y: 0 }}
+            // transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <ul>
               <li>
@@ -83,7 +83,7 @@ export default function Header() {
                 </NavLink>
               </li>
             </ul>
-          </motion.div>
+          </div>
         </nav>
       </div>
     </header>

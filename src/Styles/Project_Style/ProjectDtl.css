@@ -108,6 +108,15 @@
   /* Ensures images don't overflow */
   border-radius: 12px;
 }
+#cntt {
+  background-color: #d16751;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 30px;
+  font-family: "Gantari";
+  padding: 1rem;
+  cursor: pointer;
+}
 
 /* Media Queries */
 @media (max-width: 1024px) {

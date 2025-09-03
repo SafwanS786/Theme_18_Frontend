@@ -106,12 +106,16 @@ export default function Services() {
     const handleResize = () => {
       if (window.innerWidth < 576) {
         setSettings((prevSettings) => ({ ...prevSettings, slidesToShow: 1 }));
+        console.log(window.innerWidth);
       } else if (window.innerWidth < 768) {
         setSettings((prevSettings) => ({ ...prevSettings, slidesToShow: 2 }));
+        console.log(window.innerWidth);
       } else if (window.innerWidth < 1024) {
         setSettings((prevSettings) => ({ ...prevSettings, slidesToShow: 3 }));
+        console.log(window.innerWidth);
       } else {
         setSettings((prevSettings) => ({ ...prevSettings, slidesToShow: 4 }));
+        console.log(window.innerWidth);
       }
     };
     handleResize();
