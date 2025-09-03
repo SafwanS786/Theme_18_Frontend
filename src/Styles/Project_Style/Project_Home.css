@@ -61,6 +61,24 @@
   color: #000;
   cursor: pointer;
 }
+.active-btn {
+  border-radius: 30px;
+  border: 1px solid #f3f5fa;
+  background-color: aqua;
+  color: #999;
+  padding: 0.6rem 1rem;
+  font-size: clamp(0.7rem, 1vw, 1rem); /* scale with screen */
+  font-weight: 600;
+}
+#cnt.active-btn {
+  /* border: 1px solid #f3f5fa;
+  background-color: aqua;
+  color: #999; */
+  border: 1px solid #000;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+}
 
 /* Grid layout */
 /* .image_grid {
