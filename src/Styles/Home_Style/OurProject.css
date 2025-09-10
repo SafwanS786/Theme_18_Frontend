@@ -84,7 +84,7 @@
   transform: translateY(20px);
   transition: all 0.3s ease;
 } */
- .overlay {
+.overlay {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -103,7 +103,7 @@
   height: 20%;
   transform: translateY(20px);
   transition: all 0.3s ease;
-}
+} 
 
 .image-card:hover .overlay {
   opacity: 1;
@@ -115,7 +115,7 @@
   font-size: 1rem;
   font-weight: 600;
   color: #000000;
-  }
+}
 
 .overlay h3 {
   margin: 5px 0 0;

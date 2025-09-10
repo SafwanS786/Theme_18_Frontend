@@ -4,7 +4,7 @@
   justify-content: center;
   gap: clamp(1rem, 3vw, 3rem);
   margin: 5rem auto;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   padding: 0 1rem;
   flex-wrap: wrap; /* helps at mid-widths */
 }
@@ -23,7 +23,7 @@
 }
 
 .text_content {
-  flex: 1 1 50%;
+  flex: 1 1 50%;  
   padding: 1rem;
 }
 
