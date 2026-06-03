@@ -18,7 +18,7 @@ export default function Blog_Detalis() {
       </div>
       <div className="container Blog_Down_Detail_Page">
         <img src={Info_images} alt="Details" />
-      </div>
+      </div>  
       <div className="container blog_text">
         <h1>Modern Construction Techniques</h1>
         <p>

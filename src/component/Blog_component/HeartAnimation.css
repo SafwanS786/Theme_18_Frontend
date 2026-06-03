@@ -1,0 +1,141 @@
+/* HeartAnimation.css */
+
+.heart_container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* BIG HEART */
+.big_heart {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: red;
+  transform: rotate(-45deg);
+  animation: heartbeat 1s infinite;
+  box-shadow: 0 0 50px red;
+}
+
+.big_heart::before,
+.big_heart::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: red;
+  border-radius: 50%;
+}
+
+.big_heart::before {
+  top: -100px;
+  left: 0;
+}
+
+.big_heart::after {
+  left: 100px;
+  top: 0;
+}
+.love_text {
+  position: absolute;
+  top: -40px;
+  left: 50px;
+  right: -36px;
+  transform: rotate(45deg);
+  text-align: center;
+  color: white;
+  font-size: 32px;
+  font-family: cursive;
+  z-index: 10;
+  text-shadow: 0 0 20px white;
+}
+/* HEART BEAT */
+@keyframes heartbeat {
+  0% {
+    transform: rotate(-45deg) scale(1);
+  }
+  25% {
+    transform: rotate(-45deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(-45deg) scale(1);
+  }
+  75% {
+    transform: rotate(-45deg) scale(1.15);
+  }
+  100% {
+    transform: rotate(-45deg) scale(1);
+  }
+}
+
+/* SMALL FLOATING HEARTS */
+.small_heart {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: pink;
+  transform: rotate(-45deg);
+  animation: floatUp 4s linear infinite;
+}
+
+.small_heart::before,
+.small_heart::after {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: pink;
+  border-radius: 50%;
+}
+
+.small_heart::before {
+  top: -20px;
+  left: 0;
+}
+
+.small_heart::after {
+  left: 20px;
+  top: 0;
+}
+
+/* Different Positions */
+.heart1 {
+  left: 45%;
+  animation-delay: 0s;
+}
+
+.heart2 {
+  left: 50%;
+  animation-delay: 1s;
+}
+
+.heart3 {
+  left: 55%;
+  animation-delay: 2s;
+}
+
+.heart4 {
+  left: 40%;
+  animation-delay: 3s;
+}
+
+.heart5 {
+  left: 60%;
+  animation-delay: 4s;
+}
+
+/* Floating Animation */
+@keyframes floatUp {
+  0% {
+    transform: rotate(-45deg) translateY(0) scale(0.5);
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(-45deg) translateY(-800px) scale(1.5);
+    opacity: 0;
+  }
+}

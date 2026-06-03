@@ -1,0 +1,711 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { motion, AnimatePresence } from "framer-motion";
+import { BsCheckCircle } from "react-icons/bs";
+import { faCircle, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Icon, Infinity } from "lucide-react";
+const PricingCards = ({
+  isMonthly,
+  setIsMonthly,
+  handleToggle,
+  isOpenTab,
+  tabRef,
+  handleTabClick,
+  isActives,
+}) => {
+  const [planType, setPlanType] = useState(isOpenTab === 0 ? "user" : "team");
+  const [planData, setPlanData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  // const baseUrl = "http://103.91.123.245/manav/SimplifyteAdminPanel/public/api";
+  // const baseUrl = "https://env-7076335.in1.cantechcloud.com/api";
+  const baseUrl = "https://staging-admin.in1.cantechcloud.com/api";
+
+  // const DummyData = [
+  //   {
+  //     Icon: Infinity,
+  //     heading1: "Unlimited projects",
+  //   },
+  //   {
+  //     heading2: "Unlimited storage",
+  //     Icon: Infinity,
+  //   },
+  //   {
+  //     Icon: Infinity,
+  //     heading3: "24/7 customer support",
+  //   },
+  //   {
+  //     Icon: Infinity,
+  //     heading4: "Advanced analytics",
+  //   },
+  //   {
+  //     Icon: Infinity,
+  //     heading5: "Team collaboration tools",
+  //   },
+  //   {
+  //     Icon: Infinity,
+  //     heading6: "Custom integrations",
+  //   },
+  // ];
+  // const DummyPlans = [
+  //   {
+  //     name: "Starter",
+  //     features: [
+  //       "100 tasks",
+  //       "1 GB storage",
+  //       "Reminders",
+  //       "Private Note-taking",
+  //     ],
+  //   },
+  //   {
+  //     name: "Pro",
+  //     features: [
+  //       "All Starter Features +",
+  //       "Unlimited tasks",
+  //       "5 GB storage",
+  //       "Reminders",
+  //       "Private Note-taking",
+  //     ],
+  //   },
+  //   {
+  //     name: "Elite",
+  //     features: [
+  //       "All Pro Features +",
+  //       "Unlimited tasks",
+  //       "10 GB storage",
+  //       "Reminders",
+  //       "Private Note-taking",
+  //       "Notes Collaboration",
+  //       "Simplified Task Workflow System",
+  //     ],
+  //   },
+  // ];
+  const DummyPlans = {
+    Starter: ["100 tasks", "1 GB storage", "Reminders", "Private Note-taking"],
+    Pro: [
+      "All Starter Features +",
+      "Unlimited tasks",
+      "5 GB storage",
+      "Reminders",
+      "Private Note-taking",
+    ],
+    Elite: [
+      "All Pro Features +",
+      "Unlimited tasks",
+      "10 GB storage",
+      "Reminders",
+      "Private Note-taking",
+      "Notes Collaboration",
+      "Simplified Task Workflow System",
+    ],
+  };
+  //  {
+  //     Icon: Infinity,
+  //     heading: [
+  //       "Unlimited users",
+  //       "Priority email support",
+  //       "Real-time updates",
+  //       "Custom dashboards",
+  //       "API access",
+  //       "Secure cloud backup",
+  //     ],
+  //   },
+  //   {
+  //     Icon: Infinity,
+  //     heading: [
+  //       "Unlimited tasks",
+  //       "Performance insights",
+  //       "Team permissions",
+  //       "Workflow automation",
+  //       "Third-party integrations",
+  //       "Enterprise-grade security",
+  //     ],
+  //   },
+  useEffect(() => {
+    setPlanType(isOpenTab === 0 ? "user" : "team");
+  }, [isOpenTab]);
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`${baseUrl}/plans-website?type=${planType}`)
+      .then((response) => {
+        const data = response.data?.data?.[planType] || [];
+        const allowedPlans = ["Free", "Starter", "Pro", "Elite"];
+        const filteredData = data.filter((plan) =>
+          allowedPlans.includes(plan.name.replace(" User", "")),
+        );
+        setPlanData(filteredData);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch plans", err);
+        setError("Failed to fetch plans");
+        setPlanData([]);
+        setLoading(false);
+      });
+  }, [planType]);
+
+  // console.log('Kai value che heeeeee', planData)
+  const descriptions = {
+    Free: "For very small teams",
+    Starter: "For growing teams",
+    Pro: "For scaling businesses",
+    Elite: "For large organizations",
+  };
+
+  const innerTitles = {
+    Free: "Free for everyone",
+    Elite: "Annual billing only",
+  };
+
+  const buttonConfigs = {
+    Free: { text: "Get Started", to: "/waitlist" },
+    Starter: { text: "Get Started", to: "/waitlist" },
+    Pro: { text: "Get Started", to: "/waitlist" },
+    Elite: { text: "Request Trial", to: "/contactsales" },
+  };
+
+  // Fallback configuration for unexpected plan names
+  const defaultButtonConfig = { text: "Contact Us", to: "/contactsales" };
+
+  const orderMap = {
+    "Free User": 0,
+    "Starter User": 1,
+    "Pro User": 2,
+    "Elite User": 3,
+    Free: 0,
+    Starter: 1,
+    Pro: 2,
+    Elite: 3,
+  };
+
+  // Filter plans to only include Free, Starter, Pro, and Elite
+  const allowedPlans = ["Starter", "Pro", "Elite"];
+  const sortedPlans = [...planData]
+    .filter((plan) => {
+      const planName = plan.name.replace(" User", "");
+      return allowedPlans.includes(planName);
+    })
+    .sort((a, b) => orderMap[a.name] - orderMap[b.name]);
+
+  const formatFeature = (f) => {
+    if (f.pivot.status === "included") {
+      return f.name;
+    } else if (f.pivot.status === "custom") {
+      return `Custom ${f.name}`;
+    } else {
+      let limitText = f.formatted_limit;
+      if (typeof limitText === "number") {
+        limitText = limitText.toString();
+      }
+      if (f.unit) {
+        limitText += ` ${f.unit}`;
+      }
+      if (f.code === "page_history") {
+        limitText += " days";
+      }
+      if (f.pivot.status === "unlimited" || limitText === "unlimited") {
+        limitText = "Unlimited";
+      }
+      const itemName = f.name.replace(/^Maximum /i, "").toLowerCase();
+      return `${limitText} ${itemName}`;
+    }
+  };
+
+  const getPlanFeatures = (plan, previousPlan) => {
+    let allFeatures = [...plan.features];
+
+    if (planType === "team" && plan.included_users !== null) {
+      allFeatures.unshift({
+        id: "users",
+        code: "users",
+        name: "Users",
+        formatted_limit: plan.included_users,
+        pivot: {
+          status: "limited",
+          limit_value: plan.included_users,
+        },
+      });
+    }
+
+    let featuresList = allFeatures.map(formatFeature);
+
+    if (previousPlan) {
+      const prevMap = new Map();
+      const prevFeatures = getPlanFeatures(previousPlan, null)[1]; // Get full features of previous
+      prevFeatures.forEach((prevF, index) => {
+        prevMap.set(previousPlan.features[index]?.code || "users", {
+          status: previousPlan.features[index]?.pivot.status || "limited",
+          limit_value:
+            previousPlan.features[index]?.pivot.limit_value ||
+            previousPlan.included_users,
+        });
+      });
+
+      featuresList = [];
+      allFeatures.forEach((f) => {
+        const comp = prevMap.get(f.code);
+        if (
+          !comp ||
+          comp.status !== f.pivot.status ||
+          comp.limit_value !== f.pivot.limit_value
+        ) {
+          featuresList.push(formatFeature(f));
+        }
+      });
+    }
+
+    return [allFeatures, featuresList];
+  };
+
+  const getPreviousPlan = (currentName) => {
+    const currentIndex = orderMap[currentName];
+    const prevIndex = currentIndex - 1;
+    return sortedPlans.find((p) => orderMap[p.name] === prevIndex);
+  };
+
+  return (
+    <>
+      <ul
+        ref={tabRef}
+        className={`t-width inline-block w-fit mx-auto flex-wrap justify-center text-center p-2 bg-white dark:bg-slate-900 shadow dark:shadow-gray-800 rounded-full my-element ${
+          isActives ? "sticky" : ""
+        }`}
+      >
+        <li role="presentation" className="tab-btn inline-block">
+          <button
+            onClick={() => handleTabClick(0)}
+            className={`${
+              isOpenTab === 0 ? "text-white bg-indigo-600 hover:text-white" : ""
+            } tbist px-4 py-1 text-sm font-semibold rounded-full w-full transition-all duration-500 ease-in-out`}
+          >
+            <FontAwesomeIcon icon={faUser} className="sub-header-career mr-2" />
+            {isActives ? <span>User</span> : <span>Per User Plans</span>}
+          </button>
+        </li>
+        <li role="presentation" className="tab-btn inline-block">
+          <button
+            onClick={() => handleTabClick(1)}
+            className={`${
+              isOpenTab === 1 ? "text-white bg-indigo-600 hover:text-white" : ""
+            } tbist px-4 py-1 text-sm font-semibold rounded-full w-full transition-all duration-500 ease-in-out`}
+          >
+            <FontAwesomeIcon
+              icon={faUsers}
+              className="sub-header-career mr-2"
+            />
+            {isActives ? <span>Teams</span> : <span>Teams Plans</span>}
+          </button>
+        </li>
+      </ul>
+      <div id="StarterContent" className="mt-6">
+        <div>
+          {error ? (
+            <div>Error: {error}</div>
+          ) : planData.length > 0 ? (
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 mt-6 gap-[30px]  items-stretch">
+              {sortedPlans.map((plan, index) => {
+                const planName = plan.name.replace(" User", "");
+                const isBest = planName === "Pro";
+                const previousPlan = getPreviousPlan(plan.name);
+                const plusLine = previousPlan
+                  ? `All ${previousPlan.name.replace(" User", "")} Features +`
+                  : null;
+                let features = getPlanFeatures(plan, previousPlan)[1];
+                if (plusLine) {
+                  features = [plusLine, ...features];
+                }
+                const description =
+                  descriptions[planName] || "Plan for your needs";
+                const buttonConfig =
+                  buttonConfigs[planName] || defaultButtonConfig;
+
+                let monthlyPrice, yearlyPrice;
+                if (planName === "Elite") {
+                  monthlyPrice = parseFloat(plan.monthly_price).toLocaleString(
+                    "en-IN",
+                  );
+                  yearlyPrice = parseFloat(plan.yearly_price).toLocaleString(
+                    "en-IN",
+                  );
+                  console.log(
+                    "Elite prices - Monthly:",
+                    monthlyPrice,
+                    "Yearly:",
+                    yearlyPrice,
+                  );
+                } else if (plan.slabs && plan.slabs.length > 0) {
+                  const slab = plan.slabs[0];
+                  monthlyPrice = (
+                    parseFloat(slab.rate_monthly) * slab.count
+                  ).toLocaleString("en-IN");
+                  yearlyPrice = (
+                    parseFloat(slab.rate_annual) * slab.count
+                  ).toLocaleString("en-IN");
+                } else {
+                  monthlyPrice = parseFloat(plan.monthly_price).toLocaleString(
+                    "en-IN",
+                  );
+                  console.log("MO", monthlyPrice);
+                  yearlyPrice = parseFloat(plan.yearly_price).toLocaleString(
+                    "en-IN",
+                  );
+                }
+
+                const useMonthly = isOpenTab === 0 ? isMonthly : false;
+                // const displayPrice = useMonthly ? monthlyPrice : ((+yearlyPrice.replace(/,/g, '')) / 12);
+                // let displayPrice;
+                // if (planName === "Elite" || planName === "Free") {
+                //   // For "Free" and "Elite", display as is.
+                //   displayPrice = planName === "Elite" ? "Custom pricing " : "0";
+                // } else {
+                //   // For other plans (Starter, Pro)
+                //   if (planType === "team") {
+                //     // For Teams Plan, display the full yearly price without dividing by 12
+                //     displayPrice = yearlyPrice;
+                //   } else {
+                //     // Otherwise, for "user" plans, divide by 12 if it's monthly toggle
+                //     if (isMonthly) {
+                //       displayPrice = monthlyPrice;
+                //     } else {
+                //       const divided = (+yearlyPrice.replace(/,/g, '')) / 12;
+                //       displayPrice = divided.toLocaleString("en-IN", { maximumFractionDigits: 0 });
+                //     }
+                //   }
+                // }
+                let displayPrice;
+                if (planName === "Free") {
+                  displayPrice = "0";
+                } else if (planType === "team" && planName === "Elite") {
+                  // For Elite team plan, show custom pricing text
+                  displayPrice = "Custom";
+                } else if (
+                  planType === "team" &&
+                  planName === "Pro" &&
+                  planName === ""
+                ) {
+                  // If you want Pro team plan to also show custom pricing
+                  displayPrice = "Custom";
+                } else if (planName === "Elite") {
+                  // For Elite user plan, show monthly price
+                  displayPrice = monthlyPrice;
+                } else {
+                  if (planType === "team") {
+                    // For other team plans (Starter, etc.), show the price
+                    displayPrice = yearlyPrice;
+                  } else {
+                    // User tab: respect the monthly/yearly toggle
+                    if (isMonthly) {
+                      displayPrice = monthlyPrice;
+                    } else {
+                      displayPrice = yearlyPrice;
+                    }
+                  }
+                }
+
+                // Remove the commas before converting to a number
+
+                const billing = isOpenTab === 0 ? "per user/month" : "p.a.";
+                console.log("What the ", billing);
+                const showToggle = isOpenTab === 0;
+                const toggleColor = useMonthly ? "#a6a8aa" : "#093a5b";
+                const toggleTransform = useMonthly
+                  ? "translateX(0)"
+                  : "translateX(17px)";
+                const spanColor = useMonthly ? "#a6a8aa" : "#093a5b";
+
+                return (
+                  <div
+                    key={index}
+                    className={`group border-b-[3px] ${
+                      isBest
+                        ? "hover:border-indigo-600"
+                        : "hover:border-indigo-600"
+                    } p-6 py-8 transition-all duration-500 overflow-hidden ease-in-out hover:scale-105 relative shadow dark:shadow-gray-800 rounded-xl ${
+                      isBest
+                        ? "bg-white dark:bg-slate-900"
+                        : "hover:bg-white dark:hover:bg-slate-900"
+                    } h-fit`}
+                  >
+                    {isBest && (
+                      <span className="absolute -end-11 -top-[10px] ltr:rotate-[45deg] rtl:-rotate-[45deg] w-32 h-16 pt-4 px-2 pb-0 flex items-center justify-center text-white bg-amber-500 font-semibold text-lg">
+                        Best
+                      </span>
+                    )}
+                    <h6 className="font-bold uppercase mb-3 text-indigo-600">
+                      {planName}
+                    </h6>
+
+                    {/* <div className="flex mb-3 price-label">
+                      {planName === "Free" ? (
+                        <>
+                          <span className="text-xl font-semibold">₹</span>
+                          <span className="price text-3xl font-semibold mb-0">
+                            0
+                          </span>
+                        </>
+                      ) : displayPrice === "Custom" ? (
+                        // Show custom pricing without ₹ symbol
+                        <span className="price text-[24px] font-semibold mb-0">
+                          Custom Pricing
+                        </span>
+                      ) : (
+                        <>
+                          <span className="text-xl font-semibold">₹</span>
+                          <AnimatePresence mode="popLayout">
+                            <motion.span
+                              key={displayPrice}
+                              className="price text-[24px] font-semibold mb-0"
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: 10 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              {displayPrice}
+                            </motion.span>
+                          </AnimatePresence>
+                          <span className="text-[14px] color_class font-semibold  mb-1 ml-1">
+                            {billing}
+                          </span>
+                        </> 
+                      )}
+                    </div> */}
+                    <div className="flex flex-col mb-3 price-label justify-between mb-3 min-h-[70px]">
+                      {planName === "Free" ? (
+                        <>
+                          <div className="flex items-center">
+                            <span className="text-xl font-semibold">₹</span>
+                            <span className="price text-3xl font-semibold mb-0">
+                              0
+                            </span>
+                          </div>
+                        </>
+                      ) : planType === "team" && planName === "Elite" ? (
+                        // Team tab - Elite plan - Show Custom Pricing
+                        <motion.span
+                          key="custom-pricing"
+                          className="price text-[24px] font-semibold mb-0"
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          Custom Pricing
+                        </motion.span>
+                      ) : planName === "Elite" ? (
+                        // User tab - Elite plan - only show main content, no bottom text
+                        <AnimatePresence mode="wait">
+                          <motion.div
+                            key={isMonthly ? "switch-text" : "price-display"}
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            transition={{ duration: 0.3 }}
+                            className="price text-[20px] font-semibold mb-0"
+                          >
+                            {isMonthly ? (
+                              <button
+                                className="relative inline-flex items-center font-semibold tracking-wide
+                                 align-middle text-base text-center border-none after:content-['']
+                                  after:absolute after:h-px after:w-0 hover:after:w-full after:end-0
+                                   hover:after:end-auto after:bottom-0 after:start-0 after:duration-500 
+                                   text-indigo-600 hover:text-indigo-600 after:bg-indigo-600 duration-500"
+                                onClick={() => setIsMonthly((prev) => !prev)}
+                              >
+                                View yearly pricing
+                              </button>
+                            ) : (
+                              // Show actual price when yearly is selected
+                              <div className="flex items-end">
+                                <span className="text-xl font-semibold">₹</span>
+                                <span className="price text-[24px] font-semibold mb-0">
+                                  {displayPrice}
+                                </span>
+                                <span className="text-[14px] color_class font-semibold mb-1 ml-1">
+                                  {billing}
+                                </span>
+                              </div>
+                            )}
+                          </motion.div>
+                        </AnimatePresence>
+                      ) : displayPrice === "Custom" ? (
+                        // Custom pricing for other plans
+                        <motion.span
+                          key="custom"
+                          className="price text-[24px] font-semibold mb-0"
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          Custom Pricing
+                        </motion.span>
+                      ) : (
+                        // Normal pricing for other plans
+                        <div className="flex items-end">
+                          <span className="text-xl font-semibold">₹</span>
+
+                          <AnimatePresence mode="popLayout">
+                            <motion.span
+                              key={displayPrice}
+                              className="price text-[24px] font-semibold mb-0"
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: 10 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              {displayPrice}
+                            </motion.span>
+                          </AnimatePresence>
+
+                          <span className="text-[14px] color_class font-semibold mb-1 ml-1">
+                            {billing}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="pricing-inner-title mb-5">
+                      {planName === "Free" ? (
+                        <span>{innerTitles[planName] || "Custom Plan"}</span>
+                      ) : planName === "Elite" ? (
+                        <span
+                          style={{
+                            fontSize: "16px",
+                            // color: isMonthly ? "#a6a8aa" : "#093a5b",
+                            color: "#093a5b",
+
+                            fontWeight: "600",
+                          }}
+                        >
+                          Billed Yearly
+                        </span>
+                      ) : isOpenTab === 1 ? (
+                        <span
+                          style={{
+                            fontSize: "15px",
+                            color: "#093a5b",
+                            fontWeight: "600",
+                          }}
+                        >
+                          Yearly Only
+                        </span>
+                      ) : (
+                        <div
+                          style={{
+                            display: "flex",
+                            gap: "15px",
+                            alignItems: "center",
+                          }}
+                        >
+                          <div
+                            className="toggle-custom"
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              cursor: "pointer",
+                              position: "relative",
+                              width: "40px",
+                              height: "22px",
+                              backgroundColor: toggleColor,
+                              borderRadius: "15px",
+                            }}
+                            onClick={handleToggle}
+                          >
+                            <div
+                              className="toggle-circle"
+                              style={{
+                                position: "absolute",
+                                top: "-1px",
+                                left: "5px",
+                                transform: toggleTransform,
+                                transition:
+                                  "transform 0.4s cubic-bezier(.16,1,.3,1)",
+                              }}
+                            >
+                              <FontAwesomeIcon
+                                icon={faCircle}
+                                style={{ fontSize: "15px", color: "#f4f4f4" }}
+                              />
+                            </div>
+                          </div>
+                          <span style={{ color: spanColor }}>
+                            Billed yearly
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    <ul
+                      className="list-none text-slate-400 minimum-height-ul max-h-[260px] overflow-auto"
+                      style={{ scrollbarWidth: "none" }}
+                    >
+                      <li className="mb-2 flex items-center ms-0">
+                        {description}
+                      </li>
+                      <li></li>
+                      {/* {features.map((feature, idx) => (
+                        <li key={idx} className="mb-2 flex items-center ms-0">
+                          <span>
+                            <BsCheckCircle className="text-indigo-600 text-base me-2" />
+                          </span>{" "}
+                          {feature}
+                        </li>
+                      ))} */}
+                      {/* {DummyData.map((features, idx) => {
+                        return (
+                          <li key={idx} className="">
+                            <span className="inline-flex flex-row gap-3 text-indigo-600 text-base me-2">
+                              <features.Icon className="w-16 h-16" />
+                              {features.heading1}
+                              {console.log("Su aave che", features)}
+                            </span>
+                          </li>
+                        );
+                      })} */}
+                      {DummyPlans.map((plan, index) => (
+                        <div key={index}>
+                          <h3 className="font-bold">{plan.name}</h3>
+
+                          <ul>
+                            {plan.features.map((feature, i) => (
+                              <li
+                                key={i}
+                                className="flex items-center gap-2 mb-2"
+                              >
+                                <BsCheckCircle className="text-indigo-600" />
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </ul>
+                    <Link
+                      to={buttonConfig.to}
+                      className="py-2 px-5 inline-block font-semibold tracking-wide border align-middle duration-500 text-base 
+                      text-center  text-white bg-indigo-600 hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 rounded-xl mt-5"
+                    >
+                      {buttonConfig.text}
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div>Loading...</div>
+          )}
+          <div className="text-gray-400 mt-10 flex justify-center items-center">
+            All plans start with a 30-day free trial with full Elite access. No
+            credit card required.
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default PricingCards;

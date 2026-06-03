@@ -8,3 +8,51 @@ https://chatgpt.com/share/68a5db24-ef40-8006-9d96-72928038c4f2
 --------------------------------------------------------21-Aug
 1>
 https://chatgpt.com/share/68a71f34-eb44-8006-9fb4-26faaa49435c
+
+
+
+
+
+25/03/26 
+API Map and Object Conecpt clear
+https://chat.deepseek.com/a/chat/s/e0563bc4-8755-47e0-8195-48c28b7ee139
+
+claude ai must che data aavdi gayu
+https://claude.ai/chat/391351db-72c3-4a15-adb8-ebe01a60ce4e
+
+array valu ola badhe map valu 
+https://claude.ai/chat/97c2b679-8f2e-4fb6-81a9-11b901958e62
+=================================================================================
+1. Closures samjho — 2 din
+2. Promises + async/await — 3 din  
+3. useEffect cleanup (lifecycle) — 2 din
+4. useMemo + useCallback — 3 din
+5. Custom hook banao — useFetch — 2 din
+6. LeetCode — roz ek easy problem
+
+https://chat.deepseek.com/a/chat/s/e91a0bdb-8b7a-4e11-8498-0cb1cd9f3a8c
+===================================================================================
+
+Resume 
+https://chat.deepseek.com/a/chat/s/0b7c2386-8669-417d-87d6-f05c63db50ca
+
+
+
+Flow of the React and all things how it goes
+https://claude.ai/chat/fd62bb75-d6af-4f9a-823f-45f928adedf9
+
+
+flow that how claude is doing like that deepseek
+https://chat.deepseek.com/a/chat/s/85c5c530-b723-4063-80ee-b93a66d75e77
+
+chat GPT that Flow like claude ai and also Debug New things i have Learn
+https://chatgpt.com/c/69df8796-a7a4-8320-82d1-a326abbbf092
+
+
+
+Route and dom Link and Overview 
+https://chat.deepseek.com/a/chat/s/e7552a3c-c1ec-4e21-9c9f-d8df041a9a59
+
+
+Docs page that TOC in claude Exaplaination
+https://claude.ai/chat/66ab78f8-98b1-4d4a-98f0-e67c23cab04b

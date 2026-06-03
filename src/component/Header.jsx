@@ -82,6 +82,15 @@ export default function Header() {
                   CONTACT US
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="/practise"
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                  onClick={handleclick}
+                >
+                  PRACTISE
+                </NavLink>
+              </li>
             </ul>
           </div>
         </nav>

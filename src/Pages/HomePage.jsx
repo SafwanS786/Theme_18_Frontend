@@ -10,6 +10,10 @@ import "../App.css";
 import Feedback from "../component/Home_component/FeedBack";
 import GetIn from "../component/Home_component/GetInTouch";
 import LatestNews from "../component/Home_component/LatestNews";
+import ReducerDemo from "../component/Practise_component/ReducerDemo";
+import Mncjobs from "../component/Practise_component/Mncjobs";
+import TableForm from "../component/Practise_component/Form";
+import "../../AdminPanel/Style/AdminPanel.css"
 
 export default function HomePage() {
   return (
@@ -22,6 +26,9 @@ export default function HomePage() {
       <Feedback />
       <GetIn />
       <LatestNews />
+      {/* <ReducerDemo /> */}
+      <Mncjobs />
+      <TableForm />
     </div>
   );
 }
