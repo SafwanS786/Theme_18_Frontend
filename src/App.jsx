@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 
 import Header from "./component/Header";
@@ -21,10 +22,17 @@ import "../AdminPanel/Style/AdminPanel.css"
 
 function App() {
   const navigate = useNavigate()
+  const location = useLocation();
+
+
+
+  const isAdminPage = location.pathname.startsWith("/Admin");
+
+  console.log("isAdminPage", isAdminPage)
   return (
     <div className="">
       <ToastContainer />
-      <Header />
+      {!isAdminPage && <Header />}
       <Routes>
         <Route path="/" element={<Navigate to="/home/" />} />
         <Route path="/home" element={<HomePage />} />
@@ -40,16 +48,18 @@ function App() {
         {/* Admin Panel */}
         <Route path="/Admin/homepage" element={<AdminHomePage />} />
       </Routes>
-      <Footer />
+      {!isAdminPage && <Footer />}
+      {!isAdminPage &&
 
-      <div className="AdminPanelBtn"
-        onClick={() => navigate("/Admin/homepage")}>
-        <span className="AdminPanelBtn_text">
-          <Shield size={25} />
-        </span>
-      </div>
+        < div className="AdminPanelBtn"
+          onClick={() => navigate("/Admin/homepage")}>
+          <span className="AdminPanelBtn_text">
+            <Shield size={25} />
+          </span>
+        </div>
+      }
 
-    </div>
+    </div >
   );
 }
 

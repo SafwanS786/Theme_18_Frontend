@@ -17,3 +17,80 @@
 }
 .AdminPanelBtn_text {
 }
+.Admin_HomePage_MainClass {
+  margin-top: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.Admin_Login_Container {
+  min-height: 100vh;
+  background: #f5f5f5;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Admin_Login_Box {
+  width: 400px;
+  background: white;
+
+  padding: 35px;
+  border-radius: 15px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.Admin_Login_Box h1 {
+  text-align: center;
+  color: #d16751;
+  margin-bottom: 25px;
+}
+
+.Input_Group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.Input_Group label {
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.Input_Group input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  font-size: 15px;
+}
+
+.Input_Group input:focus {
+  border-color: #d16751;
+}
+
+.Login_Btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+
+  background: #d16751;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.Login_Btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
