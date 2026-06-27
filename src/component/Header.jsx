@@ -32,9 +32,9 @@ export default function Header() {
         <nav className={`nav ${MenuOpen ? "active" : ""}`}>
           <div
             className="nav_bar"
-            // initial={{ y: 40, opacity: 0 }}
-            // whileInView={{ opacity: 1, y: 0 }}
-            // transition={{ duration: 0.6, ease: "easeOut" }}
+          // initial={{ y: 40, opacity: 0 }}
+          // whileInView={{ opacity: 1, y: 0 }}
+          // transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <ul>
               <li>
@@ -82,7 +82,7 @@ export default function Header() {
                   CONTACT US
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink
                   to="/practise"
                   className={({ isActive }) => (isActive ? "active" : "")}
@@ -90,7 +90,7 @@ export default function Header() {
                 >
                   PRACTISE
                 </NavLink>
-              </li>
+              </li> */}
             </ul>
           </div>
         </nav>

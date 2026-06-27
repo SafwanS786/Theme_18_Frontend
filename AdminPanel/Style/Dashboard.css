@@ -1,0 +1,345 @@
+/* Dashboard Main Container */
+.Dashboard_MainClass {
+  padding: 30px;
+  /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
+  min-height: 100vh;
+  overflow-y: auto;
+  width: 100%;
+}
+
+/* Welcome Section */
+.Dashboard_WelcomeSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px 30px;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.Dashboard_WelcomeSection h1 {
+  font-size: 32px;
+  color: #2c3e50;
+  margin: 0 0 10px 0;
+}
+
+.Dashboard_Subtitle {
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.Dashboard_DateBox {
+  background: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+/* Stats Grid */
+.Dashboard_StatsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.Stat_Card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.Stat_Card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.Stat_Icon {
+  font-size: 50px;
+}
+
+.Stat_Info {
+  flex: 1;
+}
+
+.Stat_Info h3 {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+}
+
+.Stat_Number {
+  font-size: 32px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 10px 0;
+}
+
+.Stat_Trend {
+  font-size: 12px;
+  color: #27ae60;
+}
+
+/* Different stat card colors */
+.stat_project {
+  border-left: 5px solid #3498db;
+}
+.stat_ongoing {
+  border-left: 5px solid #f39c12;
+}
+.stat_completed {
+  border-left: 5px solid #27ae60;
+}
+.stat_blog {
+  border-left: 5px solid #9b59b6;
+}
+.stat_message {
+  border-left: 5px solid #e74c3c;
+}
+.stat_views {
+  border-left: 5px solid #1abc9c;
+}
+
+/* Charts Grid */
+.Dashboard_ChartsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.Chart_Card {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.Chart_Card h3 {
+  margin: 0 0 20px 0;
+  color: #2c3e50;
+  font-size: 20px;
+}
+
+/* Progress Bars */
+.Progress_Item {
+  margin-bottom: 25px;
+}
+
+.Progress_Label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #34495e;
+}
+
+.Progress_Bar_Bg {
+  background-color: #ecf0f1;
+  height: 8px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.Progress_Bar_Fill {
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.Progress_Status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Status_Badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status_ongoing {
+  background: #f39c12;
+  color: white;
+}
+
+.status_completed {
+  background: #27ae60;
+  color: white;
+}
+
+.status_planning {
+  background: #95a5a6;
+  color: white;
+}
+
+.Project_Location {
+  color: #7f8c8d;
+  font-size: 12px;
+}
+
+/* Messages List */
+.Messages_List {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.Message_Item {
+  border-bottom: 1px solid #ecf0f1;
+  padding: 15px 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.Message_Item:hover {
+  background: #f8f9fa;
+  padding-left: 10px;
+}
+
+.Message_Header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.Message_Header strong {
+  color: #2c3e50;
+  font-size: 16px;
+}
+
+.Message_Date {
+  color: #95a5a6;
+  font-size: 12px;
+}
+
+.Message_Email {
+  color: #3498db;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.Message_Text {
+  color: #7f8c8d;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.Message_ReplyBtn {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.3s;
+}
+
+.Message_ReplyBtn:hover {
+  background: #2980b9;
+}
+
+/* Quick Actions */
+.Dashboard_QuickActions {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.Dashboard_QuickActions h3 {
+  margin: 0 0 20px 0;
+  color: #2c3e50;
+  font-size: 20px;
+}
+
+.Actions_Grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.Action_Btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+.Action_Btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.Action_Icon {
+  font-size: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .Dashboard_MainClass {
+    padding: 15px;
+  }
+
+  .Dashboard_WelcomeSection {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .Dashboard_StatsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .Dashboard_ChartsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .Actions_Grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Scrollbar Styling */
+.Dashboard_MainClass::-webkit-scrollbar {
+  width: 8px;
+}
+
+.Dashboard_MainClass::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.Dashboard_MainClass::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+.Dashboard_MainClass::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
