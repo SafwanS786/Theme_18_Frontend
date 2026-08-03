@@ -1,17 +1,23 @@
 import React, { useState } from 'react'
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom'
+
 import '../Style/AdminPanel.css'
 import AdminImg from "../../public/image.png"
 import ApiClient from '../../src/config/ApiClient';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom'
-export default function Login() {
+import Register from './Register';
 
+
+
+export default function Login() {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
         email: "",
         password: ""
     })
+    const [name, setName] = useState("")
 
+    console.log("Che ke nai", formData)
     const [loading, setLoading] = useState(false)
 
     const handleChange = (e) => {
@@ -19,21 +25,25 @@ export default function Login() {
             ...formData,
             [e.target.name]: e.target.value,
         });
+        console.log("handleCasdas", formData)
 
     };
+    console.log("Che ke nai handleChange", formData)
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
 
-        console.log(formData);
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
 
-        setFormData({
-            email: "",
-            password: ""
-        })
+    //     console.log(formData);
 
-        // API Call Here
-    };
+    //     setFormData({
+    //         email: "",
+    //         password: ""
+    //     })
+
+    //     // API Call Here
+    // };
+    console.log("Che ke nai c22", formData)
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -42,9 +52,15 @@ export default function Login() {
             const res = await ApiClient.post("/api/login", formData)
 
             const msg = res.data.message;
+            console.log(msg)
             console.log(res.data);
 
-            if (msg === "Login successful!") {
+            const TakeName = res.data.admin.name
+            console.log("TTTTTT", TakeName)
+            setName(TakeName)
+
+            localStorage.setItem("AdminName", TakeName)
+            if (res.status === 200) {
                 toast.success("Successfull Login")
                 navigate("/Admin/AdminPage/dashboard")
             }
@@ -56,7 +72,10 @@ export default function Login() {
         } catch (err) {
             console.error("Error", err);
             toast.error("Login Denied")
-
+            setFormData({
+                email: "",
+                password: ""
+            })
         }
     }
     return (
@@ -67,7 +86,9 @@ export default function Login() {
             <div className="Admin_Login_Box">
                 <h1>Admin Login</h1>
 
-                <form onSubmit={handleSubmit}>
+                <form>
+                    {console.log("ahdag", formData.email)}
+                    {/* onSubmit={handleSubmit} */}
                     <div className="Input_Group">
                         <label>Email</label>
                         <input
@@ -76,7 +97,9 @@ export default function Login() {
                             placeholder="Enter Email"
                             value={formData.email}
                             onChange={handleChange}
+
                         />
+                        {console.log("ahdag", formData.email)}
                     </div>
 
                     <div className="Input_Group">
@@ -92,6 +115,9 @@ export default function Login() {
 
                     <button className="Login_Btn" onClick={handleLogin}>
                         Login
+                    </button>
+                    <button className="Register_btn" onClick={() => navigate("/Register")}>
+                        Register
                     </button>
                 </form>
             </div>

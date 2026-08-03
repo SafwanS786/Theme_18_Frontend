@@ -27,8 +27,8 @@ import About from "../AdminPanel/Pages/About.jsx";
 import Contact from "../AdminPanel/Pages/Contact.jsx";
 import AdminUser from "../AdminPanel/Pages/AdminUser.jsx";
 import Media from "../AdminPanel/Pages/Media.jsx";
-import Gallery from "../AdminPanel/Pages/Gallery.jsx";
 import Setting from "../AdminPanel/Pages/Setting.jsx";
+import Register from "../AdminPanel/Authorization/Register.jsx";
 
 function App() {
   const navigate = useNavigate()
@@ -50,8 +50,10 @@ function App() {
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/projects/details" element={<Project_Details />} />
         <Route path="/blog" element={<BlogPage />} />
-        <Route path="/blog/details" element={<Blog_Detalis />} />
+        <Route path="/blog/details/:id" element={<Blog_Detalis />} />
         <Route path="/contact_us" element={<ContactPage />} />
+        <Route path="/Register" element={<Register />} />
+
         {/* <Route path="/practise" element={<Practise />} /> */}
 
 
@@ -70,14 +72,7 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="adminuser" element={<AdminUser />} />
           <Route path="media" element={<Media />} />
-          <Route path="gallery" element={<Gallery />} />
           <Route path="setting" element={<Setting />} />
-
-
-
-
-
-
         </Route>
 
 

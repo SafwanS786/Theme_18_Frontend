@@ -3,7 +3,7 @@ import "../Style/AdminPanel.css";
 import ApiClient from "../../src/config/ApiClient";
 import { toast } from "react-toastify";
 
-export default function Register({ onSuccess, onCancel }) {
+export default function Register({ onSuccess, onCancel, onClose }) {
     const [NewData, setNewData] = useState({
         name: "",
         email: "",
@@ -17,9 +17,16 @@ export default function Register({ onSuccess, onCancel }) {
         try {
             const add = await ApiClient.post("/api/register", NewData)
             toast.success("Successfull Registration")
+            setNewData({
+                name: "",
+                email: "",
+                password: "",
+            })
+            onClose()
         } catch (err) {
             console.error("Error", err);
             toast.error("Registration Denied")
+
         }
 
     }

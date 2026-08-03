@@ -75,6 +75,15 @@
   margin-top: 15px;
 }
 
+.content_Full {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.8;
+}
+
 /* Separator line */
 #h {
   border: 1px solid #dddddd;
@@ -93,7 +102,7 @@
 }
 
 /* Card hover effect */
-.news_img > div {
+.news_img>div {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
@@ -101,7 +110,7 @@
   transition: all 0.3s ease;
 }
 
-.news_img > div:hover {
+.news_img>div:hover {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   transform: translateY(-5px);
 }
@@ -111,7 +120,7 @@
   transition: transform 0.5s ease;
 }
 
-.news_img > div:hover img {
+.news_img>div:hover img {
   transform: scale(1.05);
 }
 

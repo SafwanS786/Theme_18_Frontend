@@ -27,7 +27,7 @@ export default function HomePage() {
       <GetIn />
       <LatestNews />
       {/* <ReducerDemo /> */}
-      <Mncjobs />
+      {/* <Mncjobs /> */}
       <TableForm />
     </div>
   );

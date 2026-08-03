@@ -150,7 +150,7 @@ export default function AdminUser() {
                         </div>
                     </div>
                     {newadmin && <Register onCancel={() => setNewAdmin(false)}
-                        onSuccess={() => setNewAdmin(false)} />}
+                        onSuccess={() => setNewAdmin(false)} onClose={() => setNewAdmin(false)} />}
                     {/* Bulk Actions */}
                     {selectedUsers.length > 0 && (
                         <div className="bulk-actions">
