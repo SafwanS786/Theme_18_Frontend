@@ -1,0 +1,181 @@
+.blog-header-top {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.create-blog-btn {
+  padding: 12px 26px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, .15);
+
+  background: #ff7b29;
+  backdrop-filter: blur(12px);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  cursor: pointer;
+  transition: .3s;
+}
+
+.create-blog-btn:hover {
+  background: #ff7b29;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.blog-table-page {
+  padding: 40px;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+.blog-table-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.table-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.table-header p {
+  margin-top: 5px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.table-wrapper {
+  margin-top: 25px;
+  overflow-x: auto;
+}
+
+.blog-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.blog-table thead {
+  background: #f1f5f9;
+  /* color: #10b981; */
+}
+
+.blog-table th {
+  text-align: left;
+  padding: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.blog-table td {
+  padding: 16px 14px;
+  font-size: 14px;
+  color: #475569;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.blog-table tbody tr {
+  transition: 0.2s ease;
+}
+
+.blog-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.title-cell .blog-title {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.category-badge {
+  background: rgba(249, 115, 22, 0.1);
+  color: #f97316;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Status Select */
+.status-select {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.status-select.Published {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+.status-select.Draft {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.edit-btn:hover {
+  background: #3b82f6;
+  color: white;
+}
+
+.delete-btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #ef4444;
+  color: white;
+}
+
+.center {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+
+  .blog-table th,
+  .blog-table td {
+    padding: 12px 8px;
+    font-size: 12px;
+  }
+}

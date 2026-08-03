@@ -6,8 +6,9 @@ export const baseURL = "http://localhost:3003";
 
 const ApiClient = axios.create({
     baseURL,
-    header: {
-        contentType: "application/json"
+    headers: {
+        // contentType: "application/json"
+        "Content-Type": "application/json",
     }
 })
 

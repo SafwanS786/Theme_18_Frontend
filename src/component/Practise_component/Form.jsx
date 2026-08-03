@@ -93,7 +93,7 @@ export default function TableForm() {
       age: user.age,
       city: user.city
     })
-    seteditid(user.id)
+    seteditid(user._id)
     setIsEditing(true)
   }
   const handleCancel = () => {
@@ -108,6 +108,7 @@ export default function TableForm() {
   const handleDelete = async (id) => {
     try {
       const res = await ApiClient.delete(`/adduser/${id}`)
+      console.log(res)
       toast.success("Data Deleted Successfully")
       FetchData();
     } catch (err) {
@@ -219,14 +220,14 @@ export default function TableForm() {
         <tbody>
           {currentData.length > 0 ?
             (currentData.map((value) => (
-              <tr key={value.id}>
+              <tr key={value._id}>
                 {/* <td>{value.id}</td> */}
                 <td>{value.name}</td>
                 <td>{value.age}</td>
                 <td>{value.city}</td>
                 <td className="action_btns">
                   <button onClick={() => handleEdit(value)} className="Editbtn"> <Edit size={16} /></button>
-                  <button onClick={() => handleDelete(value.id)} className="deletebtn"> <Trash size={16} /></button>
+                  <button onClick={() => handleDelete(value._id)} className="deletebtn"> <Trash size={16} /></button>
                 </td>
               </tr>
             ))) : (

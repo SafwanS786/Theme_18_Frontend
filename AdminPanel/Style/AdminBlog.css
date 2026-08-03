@@ -1,0 +1,106 @@
+.blog-page {
+    padding: 40px;
+    background: #f8fafc;
+    min-height: 100vh;
+}
+
+.blog-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 1100px;
+    margin: auto;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.blog-header h2 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.blog-header p {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.blog-form {
+    margin-top: 30px;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full {
+    grid-column: span 2;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #334155;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    font-size: 14px;
+    background: #f9fafb;
+    transition: 0.2s ease;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #f97316;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+.blog-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.blog-actions button {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    background: linear-gradient(90deg, #f97316, #ea580c);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.blog-actions button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+}
+
+@media (max-width: 768px) {
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: span 1;
+    }
+}

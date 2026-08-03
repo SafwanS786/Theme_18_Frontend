@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import details from "../Blog_component/img/Details.png";
 import "../../Styles/Blog_Style/Details.css";
 import Info_images from "../Blog_component/img/Info.jpg";
@@ -7,18 +7,28 @@ import Image1 from "../Blog_component/img/image 1.jpg";
 
 export default function Blog_Detalis() {
   const { id } = useParams();
+
+  const location = useLocation()
+  const blog = location.state?.blog
+
+  console.log("BLOG", blog)
+
+  if (!blog) {
+    return <p>Blog not found. Please go back to blog list.</p>;
+  }
+
   return (
     <>
       <div
         className="Blog_Details"
         style={{ backgroundImage: `url(${details})` }}
       >
-        <h1>Blog Details{id}</h1>
+        <h1>Blog Details</h1>
         <p>Home/Blog Details</p>
       </div>
-      <div className="container Blog_Down_Detail_Page">
+      {/* <div className="container Blog_Down_Detail_Page">
         <img src={Info_images} alt="Details" />
-      </div>  
+      </div>
       <div className="container blog_text">
         <h1>Modern Construction Techniques</h1>
         <p>
@@ -64,6 +74,13 @@ export default function Blog_Detalis() {
             Post Comment
           </button>
         </div>
+      </div> */}
+      <div className="blog_text">
+        <h1>{blog.title}</h1>
+        <p className="meta">By {blog.author} | {blog.category}</p>
+        <img src={blog.thumbnail} alt={blog.title} />
+        <p className="excerpt">{blog.excerpt}</p>
+        <p className="content">{blog.content}</p>
       </div>
     </>
   );
