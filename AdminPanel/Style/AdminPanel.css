@@ -99,6 +99,27 @@
 
 .Register_btn {}
 
+.Forget_Psd {
+  width: fit-content;
+  margin: 12px 0 0 auto;
+  display: block;
+
+  background: transparent;
+  border: none;
+
+  color: #d6674f;
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.Forget_Psd:hover {
+  color: #b94f39;
+  text-decoration: underline;
+}
+
 /* ==================================================Welocme.css======================================= */
 .Welcome_Main {
   min-height: 100vh;

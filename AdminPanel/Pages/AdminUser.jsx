@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../Style/AdminUser.css"
 import Register from '../Authorization/register'
+import ApiClient from '../../src/config/ApiClient'
+import { toast } from 'react-toastify'
 export default function AdminUser() {
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedUsers, setSelectedUsers] = useState([])
@@ -32,14 +34,14 @@ export default function AdminUser() {
             joinDate: '2024-03-10',
         }
     ])
-
+    const [usersData, setUsersData] = useState([])
     const stats = {
-        total: users.length,
-        active: users.filter(u => u.status === 'active').length,
-        admins: users.filter(u => u.role === 'Admin').length
+        total: usersData.length,
+        active: usersData.filter(u => u.status === 'active').length,
+        admins: usersData.filter(u => u.role === 'Admin').length
     }
 
-    const filteredUsers = users.filter(user =>
+    const filteredUsers = usersData.filter(user =>
         user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.email.toLowerCase().includes(searchTerm.toLowerCase())
     )
@@ -76,6 +78,21 @@ export default function AdminUser() {
         console.log("Open")
         setNewAdmin(true)
     }
+    const GetAdmin = async () => {
+        try {
+
+            const AdminRes = await ApiClient.get("/api/login")
+            const AdminData = AdminRes.data.data
+            console.log("ADMIN", AdminData)
+            setUsersData(AdminData)
+        } catch (err) {
+            console.error("Error", err)
+            toast.error("Failed to Fetch Admin data")
+        }
+    }
+    useEffect(() => {
+        GetAdmin()
+    }, [])
     return (
         <div className="admin-user-container">
 
@@ -167,7 +184,7 @@ export default function AdminUser() {
                 {viewMode === 'grid' && (
                     <div className="users-grid">
                         {filteredUsers.map((user) => (
-                            <div key={user.id} className="user-card">
+                            <div key={user._id} className="user-card">
                                 <div className="card-header">
                                     <div className="user-info">
                                         <input

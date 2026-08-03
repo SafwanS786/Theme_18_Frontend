@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom'
-
+import { EyeOff, Eye } from "lucide-react"
 import '../Style/AdminPanel.css'
 import AdminImg from "../../public/image.png"
 import ApiClient from '../../src/config/ApiClient';
@@ -16,6 +16,7 @@ export default function Login() {
         password: ""
     })
     const [name, setName] = useState("")
+    const [showPsd, setShowPsd] = useState(false)
 
     console.log("Che ke nai", formData)
     const [loading, setLoading] = useState(false)
@@ -58,6 +59,11 @@ export default function Login() {
             const TakeName = res.data.admin.name
             console.log("TTTTTT", TakeName)
             setName(TakeName)
+
+            const Send_Token = res.data.token
+            console.log("SEND", Send_Token)
+
+            localStorage.setItem("Token", Send_Token)
 
             localStorage.setItem("AdminName", TakeName)
             if (res.status === 200) {
@@ -104,20 +110,31 @@ export default function Login() {
 
                     <div className="Input_Group">
                         <label>Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Enter Password"
-                            value={formData.password}
-                            onChange={handleChange}
-                        />
+                        <div className='password-box'>
+                            <input
+                                type={showPsd ? "text" : "password"}
+                                name="password"
+                                placeholder="Enter Password"
+                                value={formData.password}
+                                onChange={handleChange}
+                            />
+                            <button
+                                type="button"
+                                className="eye-btn"
+                                onClick={() => setShowPsd(prev => !prev)}>
+                                {showPsd ? <EyeOff size={18} /> : <Eye size={18} />}
+                            </button>
+                        </div>
                     </div>
 
                     <button className="Login_Btn" onClick={handleLogin}>
                         Login
                     </button>
-                    <button className="Register_btn" onClick={() => navigate("/Register")}>
+                    {/* <button className="Register_btn" onClick={() => navigate("/Register")}>
                         Register
+                    </button> */}
+                    <button className="Forget_Psd" onClick={() => navigate("/forget-password")}>
+                        Forget-Password
                     </button>
                 </form>
             </div>
