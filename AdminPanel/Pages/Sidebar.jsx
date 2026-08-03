@@ -139,11 +139,17 @@ export default function Sidebar() {
     const [adminName, setAdminName] = useState("Admin");
     const navigate = useNavigate();
     const location = useLocation();
+    const [token, setToken] = useState("")
 
     useEffect(() => {
         const storeName = localStorage.getItem("AdminName");
         if (storeName) setAdminName(storeName);
     }, []);
+
+    useEffect(() => {
+        const Get_Token = localStorage.getItem("Token")
+        if (Get_Token) setToken(Get_Token)
+    }, [])
 
     const menuItems = [
         { name: "Dashboard", icon: LayoutDashboard, path: "dashboard" },

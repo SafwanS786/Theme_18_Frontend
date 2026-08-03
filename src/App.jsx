@@ -29,6 +29,7 @@ import AdminUser from "../AdminPanel/Pages/AdminUser.jsx";
 import Media from "../AdminPanel/Pages/Media.jsx";
 import Setting from "../AdminPanel/Pages/Setting.jsx";
 import Register from "../AdminPanel/Authorization/Register.jsx";
+import ForgetPassword from "../AdminPanel/Authorization/ForgetPassword.jsx";
 
 function App() {
   const navigate = useNavigate()
@@ -36,7 +37,8 @@ function App() {
 
 
 
-  const isAdminPage = location.pathname.startsWith("/Admin");
+  const isAdminPage = location.pathname.startsWith("/Admin") || location.pathname === "/forget-password";
+  // const WithOut = location.pathname
 
   console.log("isAdminPage", isAdminPage)
   return (
@@ -53,6 +55,7 @@ function App() {
         <Route path="/blog/details/:id" element={<Blog_Detalis />} />
         <Route path="/contact_us" element={<ContactPage />} />
         <Route path="/Register" element={<Register />} />
+
 
         {/* <Route path="/practise" element={<Practise />} /> */}
 
@@ -75,11 +78,13 @@ function App() {
           <Route path="setting" element={<Setting />} />
         </Route>
 
+        <Route path="">
+          <Route path="/forget-password" element={<ForgetPassword />} />
+        </Route>
 
       </Routes>
       {!isAdminPage && <Footer />}
       {!isAdminPage &&
-
         < div className="AdminPanelBtn"
           onClick={() => navigate("/Admin/login")}>
           <span className="AdminPanelBtn_text">

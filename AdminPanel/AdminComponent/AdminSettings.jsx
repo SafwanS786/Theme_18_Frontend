@@ -1,9 +1,65 @@
 import React, { useState } from "react";
+import { Eye, EyeOff } from "lucide-react"
+
+
 import "../Style/AdminSettings.css";
+import ApiClient from "../../src/config/ApiClient";
+import { toast } from "react-toastify";
 
 export default function AdminSettings() {
   const [activeTab, setActiveTab] = useState("general");
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: ""
+  })
+  const [showPassword, setShowPassword] = useState({
+    current: false,
+    new: false,
+    confirm: false
+  })
 
+
+  const handlePasswordChange = (e) => {
+    setPasswordData({
+      ...passwordData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleChangePassword = async () => {
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      toast.error("New Password and Confirm Password do not match");
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("Token")
+
+      const res = await ApiClient.post("/api/change-password", {
+        currentPassword: passwordData.currentPassword,
+        newPassword: passwordData.newPassword
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      toast.success("Password Changed Successfully 🥳🎉");
+      setPasswordData({
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: ""
+      })
+      setShowPassword({
+        current: false,
+        new: false,
+        confirm: false
+      })
+    } catch (err) {
+      console.error("Erro", err)
+      toast.error(err.response?.data?.message || "Something went wrong");
+    }
+  }
   return (
     <div className="settings-page">
       <div className="settings-card">
@@ -112,23 +168,88 @@ export default function AdminSettings() {
 
               <div className="form-group full">
                 <label>Current Password</label>
-                <input type="password" />
+
+                <div className="password-box">
+                  <input
+                    type={showPassword.current ? "text" : "password"}
+                    // type="password"
+                    name="currentPassword"
+                    value={passwordData.currentPassword}
+                    onChange={handlePasswordChange} />
+
+                  <button type="button"
+                    className="eye-btn"
+                    onClick={() => {
+                      setShowPassword({
+                        ...showPassword,
+                        current: !showPassword.current
+                      })
+                    }}>
+                    {showPassword.current ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+
+                </div>
               </div>
 
               <div className="form-group">
                 <label>New Password</label>
-                <input type="password" />
+
+                <div className="password-box">
+                  <input
+                    type={showPassword.new ? "text" : "password"}
+                    // type="password"
+                    name="newPassword"
+                    value={passwordData.newPassword}
+                    onChange={handlePasswordChange} />
+
+
+                  <button
+                    type="button"
+                    className="eye-btn"
+                    onClick={() =>
+                      setShowPassword({
+                        ...showPassword,
+                        new: !showPassword.new,
+                      })
+                    }
+                  >
+                    {showPassword.new ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
               </div>
 
               <div className="form-group">
                 <label>Confirm Password</label>
-                <input type="password" />
+
+                <div className="password-box">
+                  <input
+                    type={showPassword.confirm ? "text" : "password"}
+                    // type="password"
+                    name="confirmPassword"
+                    value={passwordData.confirmPassword}
+                    onChange={handlePasswordChange} />
+
+
+                  <button
+                    type="button"
+                    className="eye-btn"
+                    onClick={() =>
+                      setShowPassword({
+                        ...showPassword,
+                        confirm: !showPassword.confirm,
+                      })
+                    }
+                  >
+                    {showPassword.confirm ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
+
               </div>
 
             </div>
 
             <div className="form-actions">
-              <button>Change Password</button>
+              <button onClick={handleChangePassword}>Change Password</button>
             </div>
           </div>
         )}
