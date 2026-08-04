@@ -1,40 +1,26 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import "../Style/AdminUser.css"
 import Register from '../Authorization/register'
 import ApiClient from '../../src/config/ApiClient'
 import { toast } from 'react-toastify'
 export default function AdminUser() {
+
+    const navigate = useNavigate()
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedUsers, setSelectedUsers] = useState([])
     const [viewMode, setViewMode] = useState('grid')
     const [newadmin, setNewAdmin] = useState(false)
-    const [users, setUsers] = useState([
-        {
-            id: 1,
-            name: 'John Doe',
-            email: 'john@example.com',
-            role: 'Admin',
-            status: 'active',
-            joinDate: '2024-01-15',
-        },
-        {
-            id: 2,
-            name: 'Jane Smith',
-            email: 'jane@example.com',
-            role: 'Editor',
-            status: 'active',
-            joinDate: '2024-02-20',
-        },
-        {
-            id: 3,
-            name: 'Mike Johnson',
-            email: 'mike@example.com',
-            role: 'Viewer',
-            status: 'inactive',
-            joinDate: '2024-03-10',
-        }
-    ])
     const [usersData, setUsersData] = useState([])
+    const [email, setEmail] = useState([])
+    // Edit
+    const [OpenEdit, setOpenEdit] = useState(false)
+    const [editUser, setEditUser] = useState(null)
+
+    //Delete
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
+
     const stats = {
         total: usersData.length,
         active: usersData.filter(u => u.status === 'active').length,
@@ -84,7 +70,14 @@ export default function AdminUser() {
             const AdminRes = await ApiClient.get("/api/login")
             const AdminData = AdminRes.data.data
             console.log("ADMIN", AdminData)
+            console.log("ADMIN get Reday", AdminData[0])
+            // const GetEmail = AdminData.map((item) => ({
+            //     item: item.email
+            // }))
+            const GetEmail = AdminData.map(item => item.email)
             setUsersData(AdminData)
+            console.log("GetEmail", GetEmail)
+            setEmail(GetEmail)
         } catch (err) {
             console.error("Error", err)
             toast.error("Failed to Fetch Admin data")
@@ -93,6 +86,58 @@ export default function AdminUser() {
     useEffect(() => {
         GetAdmin()
     }, [])
+
+    const handleEditOpen = (user) => {
+        console.log("EDIT", user)
+        setEditUser(user)
+        setOpenEdit(true)
+        setNewAdmin(true)
+    }
+    const handleAdminDelete = async (deleteId) => {
+        try {
+            console.log("S", deleteId)
+            const AdminDlt = await ApiClient.delete(`/api/login/delete/${deleteId}`)
+            console.log("DELETE", AdminDlt)
+            toast.success("Admin Delete Successfully")
+            setShowDeleteModal(false)
+            // await GetAdmin()
+            const AdminRes = await ApiClient.get("/api/login");
+            const AdminData = AdminRes.data.data;
+
+            setUsersData(AdminData);
+            const loggedEmail = localStorage.getItem("AdminEmail");
+
+            // Check whether logged in user still exists
+            const exists = AdminData.some(
+                user => user.email === loggedEmail
+            );
+
+            if (!exists) {
+                localStorage.removeItem("Token");
+                localStorage.removeItem("AdminName");
+                localStorage.removeItem("AdminEmail");
+
+                toast.info("Your account has been deleted.");
+
+                navigate("/Admin/login");
+            }
+        } catch (err) {
+            console.error("Error", err)
+            toast.error("Failed to Delete Admin aaaaaa cheeeeee")
+        }
+    }
+
+    // const loggedUser = localStorage.getItem("AdminEmail")
+    // if (loggedUser?.id === email) {
+    //     console.log("ASGAJHAS", email)
+    //     localStorage.removeItem("token");
+    //     localStorage.removeItem("admin");
+
+    //     navigate("/login");
+
+    //     return;
+    // }
+    // console.log("LOOOOOOO", loggedUser, usersData)
     return (
         <div className="admin-user-container">
 
@@ -166,8 +211,23 @@ export default function AdminUser() {
                             </div>
                         </div>
                     </div>
-                    {newadmin && <Register onCancel={() => setNewAdmin(false)}
-                        onSuccess={() => setNewAdmin(false)} onClose={() => setNewAdmin(false)} />}
+                    {newadmin && (
+                        <Register
+                            editUser={editUser}
+                            OpenEdit={OpenEdit}
+                            GetAdmin={GetAdmin}
+                            onCancel={() => {
+                                setNewAdmin(false)
+                                setOpenEdit(false);
+                                setEditUser(null);
+                            }}
+                            onClose={() => {
+                                setNewAdmin(false);
+                                setOpenEdit(false);
+                                setEditUser(null);
+                            }}
+                        />)}
+
                     {/* Bulk Actions */}
                     {selectedUsers.length > 0 && (
                         <div className="bulk-actions">
@@ -217,8 +277,17 @@ export default function AdminUser() {
                                 </div>
 
                                 <div className="card-actions">
-                                    <button className="btn-edit">✏️ Edit</button>
-                                    <button className="btn-delete">🗑️ Delete</button>
+                                    <button className="btn-edit" onClick={() => handleEditOpen(user)}>✏️ Edit</button>
+                                    {/* <button className="btn-delete" onClick={() => handleAdminDelete(user._id)}>🗑️ Delete</button> */}
+                                    <button
+                                        className="btn-delete"
+                                        onClick={() => {
+                                            setDeleteId(user._id);
+                                            setShowDeleteModal(true);
+                                        }}
+                                    >
+                                        🗑️ Delete
+                                    </button>
                                 </div>
                             </div>
                         ))}
@@ -257,7 +326,7 @@ export default function AdminUser() {
                                         </td>
                                         <td>
                                             <div className="table-user">
-                                                <img src={user.avatar} alt={user.name} className="table-avatar" />
+                                                {/* <img src={user.avatar} alt={user.name} className="table-avatar" /> */}
                                                 <div className="table-user-info">
                                                     <span className="table-user-name">{user.name}</span>
                                                     <span className="table-user-email">{user.email}</span>
@@ -273,8 +342,19 @@ export default function AdminUser() {
                                         <td>{new Date(user.joinDate).toLocaleDateString()}</td>
                                         <td>
                                             <div className="action-buttons">
-                                                <button className="action-icon">✏️</button>
-                                                <button className="action-icon">🗑️</button>
+                                                {/* <button className="action-icon">✏️</button>
+                                                <button className="action-icon">🗑️</button> */}
+                                                <button className="btn-edit" onClick={() => handleEditOpen(user)}>✏️</button>
+                                                {/* <button className="btn-delete" onClick={() => handleAdminDelete(user._id)}>🗑️ Delete</button> */}
+                                                <button
+                                                    className="btn-delete"
+                                                    onClick={() => {
+                                                        setDeleteId(user._id);
+                                                        setShowDeleteModal(true);
+                                                    }}
+                                                >
+                                                    🗑️
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
@@ -283,7 +363,41 @@ export default function AdminUser() {
                         </table>
                     </div>
                 )}
+                {showDeleteModal && (
+                    <div className="delete-modal-overlay">
+                        {console.log("deleteId", deleteId)}
+                        <div className="delete-modal">
+                            <div className="delete-icon">
+                                🗑️
+                            </div>
+                            <h2>Delete Admin?</h2>
+                            <p>
+                                Are you sure you want to delete this administrator?
+                                <br />
+                                This action cannot be undone.
+                            </p>
+                            <div className="delete-buttons">
 
+                                <button
+                                    className="cancel-btn"
+                                    onClick={() => {
+                                        setShowDeleteModal(false);
+                                        setDeleteId(null);
+                                    }}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    className="delete-btn"
+                                    onClick={() => handleAdminDelete(deleteId)}
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )
+                }
                 {/* Empty State */}
                 {filteredUsers.length === 0 && (
                     <div className="empty-state">

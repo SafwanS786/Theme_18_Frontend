@@ -1,34 +1,67 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { EyeOff, Eye } from "lucide-react"
+
 import "../Style/AdminPanel.css";
 import ApiClient from "../../src/config/ApiClient";
-import { toast } from "react-toastify";
 
-export default function Register({ onSuccess, onCancel, onClose }) {
+export default function Register({ editUser, OpenEdit, onCancel, onClose, GetAdmin }) {
     const [NewData, setNewData] = useState({
         name: "",
         email: "",
         password: "",
     });
 
+    const [showpsd, setShowPsd] = useState(false)
 
+    const handleShowPsd = () => {
+        setShowPsd((prev) => !prev)
+    }
 
+    useEffect(() => {
+        if (editUser) {
+            setNewData({
+                name: editUser.name,
+                email: editUser.email,
+                password: ""
+            });
+        }
+    }, [editUser])
     const handleAdd = async (e) => {
         e.preventDefault();
-        try {
-            const add = await ApiClient.post("/api/register", NewData)
-            toast.success("Successfull Registration")
+
+        if (OpenEdit) {
+            console.log("editUser", editUser)
+            await ApiClient.patch(
+                `/api/login/${editUser._id}`,
+                NewData
+            );
             setNewData({
                 name: "",
                 email: "",
-                password: "",
-            })
+            });
             onClose()
-        } catch (err) {
-            console.error("Error", err);
-            toast.error("Registration Denied")
+            toast.success("Admin Updated");
+            await GetAdmin()
+        } else {
+
+            try {
+                const add = await ApiClient.post("/api/register", NewData)
+                toast.success("Successfull Registration")
+                setNewData({
+                    name: "",
+                    email: "",
+                    password: "",
+                })
+                onClose()
+                await GetAdmin()
+            } catch (err) {
+                console.error("Error", err);
+                toast.error("Registration Denied")
+
+            }
 
         }
-
     }
     const handleRegChange = (e) => {
         setNewData({
@@ -52,12 +85,12 @@ export default function Register({ onSuccess, onCancel, onClose }) {
         });
     };
 
-    console.log("DATA", NewData)
+    // console.log("DATA", NewData)
     return (
         <div className="modal-overlay">
             <div className="modal-container">
                 <div className="modal-header">
-                    <h2>Add New Admin</h2>
+                    <h2>{OpenEdit ? "Edit Admin" : "Add New Admin"}</h2>
                     <button className="close-btn" onClick={onCancel}>
                         ✕
                     </button>
@@ -93,19 +126,30 @@ export default function Register({ onSuccess, onCancel, onClose }) {
                             required
                         />
                     </div>
+                    {!OpenEdit && (
+                        <>
+                            <div className="modal-input-group">
+                                <label>Password</label>
+                                <div className="password-box">
+                                    <input
+                                        type={showpsd ? "text" : "password"}
+                                        name="password"
+                                        placeholder="Enter password"
+                                        autoComplete="new-password"
+                                        value={NewData.password}
+                                        onChange={handleRegChange}
+                                        required
+                                    />
 
-                    <div className="modal-input-group">
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Enter password"
-                            autoComplete="new-password"
-                            value={NewData.password}
-                            onChange={handleRegChange}
-                            required
-                        />
-                    </div>
+                                    <button
+                                        type="button"
+                                        className="eye-btn"
+                                        onClick={handleShowPsd}
+                                    >{showpsd ? <EyeOff size={18} /> : <Eye size={18} />}</button>
+                                </div>
+                            </div>
+                        </>
+                    )}
 
                     <div className="modal-buttons">
                         <button
@@ -121,11 +165,11 @@ export default function Register({ onSuccess, onCancel, onClose }) {
                             className="modal-btn-submit"
                             onClick={() => handleAdd()}
                         >
-                            Add Admin
+                            {OpenEdit ? "Update Admin" : "Add Admin"}
                         </button>
                     </div>
                 </form>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }

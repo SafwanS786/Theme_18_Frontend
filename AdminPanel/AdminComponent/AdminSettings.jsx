@@ -177,7 +177,8 @@ export default function AdminSettings() {
                     value={passwordData.currentPassword}
                     onChange={handlePasswordChange} />
 
-                  <button type="button"
+                  <button
+                    type="button"
                     className="eye-btn"
                     onClick={() => {
                       setShowPassword({

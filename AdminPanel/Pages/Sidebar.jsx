@@ -137,13 +137,19 @@ import ApiClient from '../../src/config/ApiClient';
 import "../Style/NewDashboard.css"
 export default function Sidebar() {
     const [adminName, setAdminName] = useState("Admin");
+    const [token, setToken] = useState("")
+    const [adminEmail, setAdminEmail] = useState("Email")
+
     const navigate = useNavigate();
     const location = useLocation();
-    const [token, setToken] = useState("")
 
     useEffect(() => {
         const storeName = localStorage.getItem("AdminName");
+        const storeEmail = localStorage.getItem("AdminEmail");
+
         if (storeName) setAdminName(storeName);
+        if (storeEmail) setAdminEmail(storeEmail);
+
     }, []);
 
     useEffect(() => {
