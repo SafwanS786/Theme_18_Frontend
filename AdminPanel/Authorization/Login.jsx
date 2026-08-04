@@ -57,7 +57,8 @@ export default function Login() {
             console.log(res.data);
 
             const TakeName = res.data.admin.name
-            console.log("TTTTTT", TakeName)
+            const TakeEmail = res.data.admin.email
+            console.log("TTTTTT", TakeName, TakeEmail)
             setName(TakeName)
 
             const Send_Token = res.data.token
@@ -66,6 +67,8 @@ export default function Login() {
             localStorage.setItem("Token", Send_Token)
 
             localStorage.setItem("AdminName", TakeName)
+            localStorage.setItem("AdminEmail", TakeEmail)
+
             if (res.status === 200) {
                 toast.success("Successfull Login")
                 navigate("/Admin/AdminPage/dashboard")
@@ -101,6 +104,7 @@ export default function Login() {
                             type="email"
                             name="email"
                             placeholder="Enter Email"
+                            autoComplete="off"
                             value={formData.email}
                             onChange={handleChange}
 
@@ -115,6 +119,7 @@ export default function Login() {
                                 type={showPsd ? "text" : "password"}
                                 name="password"
                                 placeholder="Enter Password"
+                                autoComplete="off"
                                 value={formData.password}
                                 onChange={handleChange}
                             />
